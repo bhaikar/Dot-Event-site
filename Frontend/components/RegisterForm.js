@@ -1,27 +1,39 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
-import Reveal from "./Reveal";
 import { CheckIcon } from "./Icons";
+import {
+  generateTransactionId,
+  generateTicketId,
+  getTicketPrice,
+  updateDate,
+  updateTime,
+} from "@/lib/registration-helpers";
+import { getSupabasePublic } from "@/lib/supabase-public";
 
+// ── Validation patterns ────────────────────────────────────
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[0-9+\-\s]{7,15}$/;
+const PHONE_RE = /^[0-9]{10}$/;
 
 export default function RegisterForm({ eventName }) {
   const isHackathon = eventName === "Hackathon";
+
+  // ── Form values ──────────────────────────────────────────
   const [values, setValues] = useState({
     teamName: "",
     college: "",
     leader: "",
     email: "",
     phone: "",
+    whatsapp: "",
     member2: "",
     member3: "",
     member4: "",
     notes: "",
+    terms: false,
+    whatsappSame: true,
   });
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   function update(field, value) {
     setValues((v) => ({ ...v, [field]: value }));
@@ -34,46 +46,106 @@ export default function RegisterForm({ eventName }) {
     if (!values.college.trim()) next.college = "Please enter your institution.";
     if (!values.leader.trim()) next.leader = "Please enter a name.";
     if (!EMAIL_RE.test(values.email.trim())) next.email = "Please enter a valid email address.";
-    if (!PHONE_RE.test(values.phone.trim())) next.phone = "Please enter a valid phone number.";
+    if (!PHONE_RE.test(values.phone.trim())) next.phone = "Please enter a valid 10-digit phone number.";
+    if (!values.whatsappSame && !PHONE_RE.test(values.whatsapp.trim())) {
+      next.whatsapp = "Please enter a valid 10-digit WhatsApp number.";
+    }
+    if (!values.member2.trim()) next.member2 = "Please enter a name.";
+    if (!values.terms) next.terms = "You must agree to the terms to continue.";
     setErrors(next);
     return Object.keys(next).length === 0;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!validate()) return;
-    // NOTE: no backend is wired up yet — this only simulates a submission.
-    // Swap this block for a real API call / Supabase insert / email trigger
-    // when the backend is ready.
-    setSubmitted(true);
-  }
 
-  if (submitted) {
-    return (
-      <div className="text-center py-12 px-7">
-        <div
-          className="w-16 h-16 rounded-full mx-auto mb-5.5 flex items-center justify-center"
-          style={{
-            background: "linear-gradient(150deg,var(--color-red-bright),var(--color-burgundy))",
-            boxShadow: "0 0 40px var(--color-glow)",
-          }}
-        >
-          <CheckIcon />
-        </div>
-        <h3 className="text-2xl uppercase mb-2.5">Registration Received</h3>
-        <p className="text-brand-text-dim text-[14px] max-w-[340px] mx-auto mb-6">
-          Thanks for registering for {eventName}. Our team will reach out with further details via
-          email.
-        </p>
-        <Link href="/events" className="btn btn-ghost">
-          Back to Events
-        </Link>
-      </div>
-    );
+    setSubmitting(true);
+    try {
+      const ticket = isHackathon ? "Hackathon" : "Gameathon";
+      const uuid = generateTransactionId();
+      const date = updateDate();
+      const timeApplication = updateTime();
+      const ticketId = generateTicketId(uuid, date, ticket);
+      const ticketPrice = getTicketPrice(ticket);
+
+      const members = [
+        String(values.member2).trim(),
+        values.member3 ? String(values.member3).trim() : "",
+        values.member4 ? String(values.member4).trim() : "",
+      ];
+
+      const teamData = {
+        teamName: values.teamName.trim(),
+        leaderName: values.leader.trim(),
+        mobile: values.phone.trim(),
+        whatsapp: values.whatsappSame ? values.phone.trim() : values.whatsapp.trim(),
+        members,
+        ticket,
+        uuid,
+        ticketId,
+        date,
+        timeApplication,
+        timeUtr: "None",
+        utr: "None",
+        receiptID: "None",
+        ticketPrice,
+        paymentStatus: "UNDER_VERIFICATION",
+      };
+
+      // Secondary write to public.registration_extras (email, college, notes)
+      // Await with timeout to prevent race condition with page navigation
+      if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        const insertPromise = getSupabasePublic()
+          .from("registration_extras")
+          .insert({
+            uuid,
+            ticket_id: ticketId,
+            email: values.email.trim(),
+            college: values.college.trim(),
+            notes: values.notes.trim() || null,
+          })
+          .then(({ error }) => {
+            if (error) {
+              console.error("registration_extras insert failed:", error);
+            }
+          })
+          .catch((err) => {
+            console.error("registration_extras insert error:", err);
+          });
+
+        const timeoutPromise = new Promise((resolve) => {
+          setTimeout(resolve, 1500);
+        });
+
+        await Promise.race([insertPromise, timeoutPromise]);
+      }
+
+      sessionStorage.setItem("teamData", JSON.stringify(teamData));
+      // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+      window.location.href = "/registration/Payment_gate.html";
+    } catch (err) {
+      console.error("Registration redirect error:", err);
+      setErrors({ _form: "An unexpected error occurred. Please try again." });
+      setSubmitting(false);
+    }
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate>
+      {errors._form && (
+        <div
+          className="mb-5 p-3.5 rounded-[10px] text-[13px] font-head"
+          style={{
+            background: "rgba(170,18,16,0.15)",
+            border: "1px solid rgba(170,18,16,0.4)",
+            color: "#e98a86",
+          }}
+        >
+          {errors._form}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
         <Field
           label={isHackathon ? "Team Name *" : "Participant / Team Name *"}
@@ -107,6 +179,8 @@ export default function RegisterForm({ eventName }) {
           error={errors.email}
         />
       </div>
+
+      {/* Phone + WhatsApp */}
       <Field
         label="Phone Number *"
         type="tel"
@@ -116,16 +190,43 @@ export default function RegisterForm({ eventName }) {
         error={errors.phone}
       />
 
+      <div className="form-row mb-5">
+        <label className="flex items-center gap-2.5 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={values.whatsappSame}
+            onChange={(e) => update("whatsappSame", e.target.checked)}
+            className="accent-brand-red-bright w-4 h-4"
+          />
+          <span className="font-head text-[11.5px] tracking-[0.12em] uppercase text-brand-rose">
+            WhatsApp number same as phone
+          </span>
+        </label>
+      </div>
+
+      {!values.whatsappSame && (
+        <Field
+          label="WhatsApp Number *"
+          type="tel"
+          placeholder="10-digit WhatsApp number"
+          value={values.whatsapp}
+          onChange={(v) => update("whatsapp", v)}
+          error={errors.whatsapp}
+        />
+      )}
+
+      {/* Team members */}
       <div className="border-t border-dashed mt-1.5 pt-5" style={{ borderColor: "var(--color-line)" }}>
         <label className="font-head text-[11.5px] tracking-[0.12em] uppercase text-brand-rose block mb-3.5">
-          Team Members (optional)
+          Team Members
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
           <Field
-            label="Team Member 2"
+            label="Team Member 2 *"
             placeholder="Full name"
             value={values.member2}
             onChange={(v) => update("member2", v)}
+            error={errors.member2}
           />
           <Field
             label="Team Member 3"
@@ -142,6 +243,7 @@ export default function RegisterForm({ eventName }) {
         />
       </div>
 
+      {/* Notes */}
       <div className="form-row mb-5">
         <label className="block font-head text-[11.5px] tracking-[0.12em] uppercase text-brand-rose mb-2.5">
           {isHackathon
@@ -160,8 +262,30 @@ export default function RegisterForm({ eventName }) {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary btn-block">
-        Submit Registration →
+      {/* Terms checkbox */}
+      <div className={`form-row mb-5 ${errors.terms ? "invalid" : ""}`}>
+        <label className="flex items-start gap-2.5 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={values.terms}
+            onChange={(e) => update("terms", e.target.checked)}
+            className="accent-brand-red-bright w-4 h-4 mt-0.5 flex-none"
+          />
+          <span className="text-[13px] text-brand-text-dim leading-relaxed">
+            I have read and agree to the{" "}
+            <strong className="text-brand-lav">Terms &amp; Conditions</strong>. I confirm the
+            information provided is accurate.
+          </span>
+        </label>
+        {errors.terms && (
+          <div className="text-[12px] mt-1.5 ml-6.5 font-head" style={{ color: "#e98a86" }}>
+            {errors.terms}
+          </div>
+        )}
+      </div>
+
+      <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
+        {submitting ? "Redirecting to Payment…" : "Continue to Payment →"}
       </button>
 
       <div
@@ -172,8 +296,8 @@ export default function RegisterForm({ eventName }) {
           <CheckIcon />
         </span>
         <span>
-          Your information is collected only for event coordination by DOT DevOps Team and will
-          not be shared with third parties.
+          Your information is collected only for event coordination by DOT DevOps Team and will not
+          be shared with third parties.
         </span>
       </div>
     </form>

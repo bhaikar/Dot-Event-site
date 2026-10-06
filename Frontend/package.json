@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "copy-backend": "node scripts/copy-backend.mjs",
+    "predev": "npm run copy-backend",
     "dev": "next dev",
+    "prebuild": "npm run copy-backend",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.117.2",
     "next": "16.3.6",
     "react": "19.2.8",
     "react-dom": "19.2.8"
