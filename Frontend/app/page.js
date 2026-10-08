@@ -146,15 +146,22 @@ export default function HomePage() {
               desc="Build. Collaborate. Innovate. A high-intensity build sprint for developers who ship."
               tags={["Build", "Code", "Collaborate"]}
               accent="rgba(170,18,16,0.35)"
+              day="5–6"
+              month="Nov"
+              dateNote="Two days"
             />
+
             <EventCard
-              href="/events/gamethon"
+              href="/events/gameathon"
               glyph="02"
               iconLabel="Play Event"
-              name="Gamethon"
-              desc="Create. Play. Compete. A competitive arena for gamers and game-builders alike."
-              tags={["Create", "Play", "Compete"]}
-              accent="rgba(167,122,131,0.3)"
+              name="Gameathon"
+              desc="Your gameathon description here."
+              tags={["Play", "Compete"]}
+              accent="rgba(170,18,16,0.35)"
+              day="7"
+              month="Nov"
+              dateNote="One day"
             />
           </div>
         </div>
