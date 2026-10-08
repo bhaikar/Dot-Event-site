@@ -146,9 +146,11 @@ export default function HomePage() {
               desc="Build. Collaborate. Innovate. A high-intensity build sprint for developers who ship."
               tags={["Build", "Code", "Collaborate"]}
               accent="rgba(170,18,16,0.35)"
+              image="/images/events/image.png"
               day="5–6"
               month="Nov"
-              dateNote="Two days"
+              time="11:00 AM → 11:00 AM"
+              dateNote="24 hours"
             />
 
             <EventCard
@@ -157,10 +159,12 @@ export default function HomePage() {
               iconLabel="Play Event"
               name="Gameathon"
               desc="Your gameathon description here."
-              tags={["Play", "Compete"]}
+              tags={["Play", "Compete", "Win"]}
               accent="rgba(170,18,16,0.35)"
+              image="/images/events/image.png"
               day="7"
               month="Nov"
+              time="Starts 10:30 AM"
               dateNote="One day"
             />
           </div>

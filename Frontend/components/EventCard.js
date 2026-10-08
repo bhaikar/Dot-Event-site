@@ -1,14 +1,16 @@
 "use client";
-import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Reveal from "./Reveal";
+import styles from "./EventCard.module.css";
 
 /**
- * EventCard
  * Props: href, glyph, iconLabel, name, desc, tags, accent, big
- * New:   day    -> "5–6" or "7"
- *        month  -> "Nov"
- *        dateNote (optional) -> small text next to the date, e.g. "Two days"
+ *        day       -> "5–6" or "7"
+ *        month     -> "Nov"
+ *        time      -> "11:00 AM → 11:00 AM" or "Starts 10:30 AM"
+ *        dateNote  -> optional small text, e.g. "24 hours"
+ *        image     -> path in /public, e.g. "/events/hackathon.jpg"
  */
 export default function EventCard({
   href,
@@ -16,118 +18,84 @@ export default function EventCard({
   iconLabel,
   name,
   desc,
-  tags,
+  tags = [],
   accent,
   big,
   day,
   month,
+  time,
   dateNote,
+  image,
 }) {
-  const glowRef = useRef(null);
-
-  // Track the cursor so the glow follows it. The listener is attached to the
-  // card's root element, so it works even if <Reveal> doesn't forward handlers.
-  useEffect(() => {
-    const card = glowRef.current?.parentElement;
-    if (!card) return;
-
-    const onMove = (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      card.style.setProperty("--my", `${e.clientY - r.top}px`);
-    };
-
-    card.addEventListener("pointermove", onMove);
-    return () => card.removeEventListener("pointermove", onMove);
-  }, []);
+  const cardStyle = {};
+  if (accent) cardStyle.borderColor = accent;
 
   return (
-    <Reveal
-      as={Link}
-      href={href}
-      className={`group panel panel-corners relative overflow-hidden block transition-all duration-300 hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-brand-red-bright,#ff4a3d)] ${
-        big ? "p-10" : "p-[30px]"
-      }`}
-      style={{ borderColor: accent }}
-    >
-      {/* Layer 1: soft spotlight that follows the cursor */}
-      <span
-        ref={glowRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), ${accent}, transparent 70%)`,
-        }}
-      />
-
-      {/* Layer 2: bright glow that only shows on the border */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          padding: 1,
-          background:
-            "radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), var(--color-brand-red-bright, #ff4a3d), transparent 65%)",
-          WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-          WebkitMaskComposite: "xor",
-          mask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
-          maskComposite: "exclude",
-        }}
-      />
-
-      {/* Ghost number */}
-      <span
-        aria-hidden="true"
-        className="absolute -top-[30px] -right-5 font-head font-bold pointer-events-none select-none transition-transform duration-500 group-hover:-translate-x-2 group-hover:translate-y-1 motion-reduce:transform-none"
-        style={{
-          fontSize: 140,
-          color: "transparent",
-          WebkitTextStroke: "1px var(--color-line)",
-          opacity: 0.5,
-        }}
-      >
-        {glyph}
-      </span>
-
-      {/* Content sits above the glow layers */}
-      <div className="relative z-10">
-        <span className="label">{iconLabel}</span>
-        <h3 className={`uppercase mb-4 mt-4 ${big ? "text-[38px]" : "text-[30px]"}`}>{name}</h3>
-
-        {/* Date stub */}
-        {day && (
-          <div className="flex items-center gap-3 mb-5">
-            <div
-              className="flex flex-col items-center justify-center min-w-[68px] px-3 py-2 border transition-colors duration-300 group-hover:bg-white/5"
-              style={{ borderColor: accent, background: "rgba(255,255,255,0.025)" }}
-            >
-              <span className="font-head text-[10px] tracking-[0.18em] uppercase text-brand-lav leading-none mb-1.5">
-                {month}
-              </span>
-              <span className="font-head font-bold text-[26px] leading-none">{day}</span>
+    <Reveal as={Link} href={href} className={styles.wrap}>
+      <div className={`${styles.card} ${big ? styles.big : ""}`} style={cardStyle}>
+        <div className={styles.top}>
+          {image && (
+            <div className={styles.media} aria-hidden="true">
+              <Image
+                src={image}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 480px"
+                className={styles.photo}
+              />
+              <div className={styles.shade} />
             </div>
-            {dateNote && <span className="text-[13px] text-brand-text-dim">{dateNote}</span>}
+          )}
+
+          <div className={styles.tab} />
+
+          <div className={styles.tabRow}>
+            <span className={styles.tabLabel}>{iconLabel}</span>
+            {dateNote && <span className={styles.dateNote}>{dateNote}</span>}
           </div>
-        )}
 
-        <p className="text-brand-text-dim text-[14.5px] mb-5.5">{desc}</p>
+          <div className={styles.ghostClip} aria-hidden="true">
+            <span className={styles.ghost}>{glyph}</span>
+          </div>
 
-        <div className="flex gap-2 flex-wrap mb-5">
-          {tags.map((t) => (
-            <span key={t} className="chip">
-              {t}
-            </span>
-          ))}
+          {(day || time) && (
+            <div className={styles.meta}>
+              {day && (
+                <div className={styles.date}>
+                  <span className={styles.day}>{day}</span>
+                  <span className={styles.month}>{month}</span>
+                </div>
+              )}
+              {time && (
+                <div className={styles.time}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 2" />
+                  </svg>
+                  {time}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
-        <div
-          className="flex items-center justify-between gap-2 font-head text-[12.5px] tracking-[0.12em] uppercase text-brand-lav border-t pt-4"
-          style={{ borderColor: "var(--color-line)" }}
-        >
-          View Event
-          <span className="text-brand-red-bright transition-transform duration-300 group-hover:translate-x-1.5 motion-reduce:transform-none">
-            →
-          </span>
+        <div className={styles.bottom}>
+          <span className={styles.name}>{name}</span>
+          <p className={styles.desc}>{desc}</p>
+
+          {tags.length > 0 && (
+            <div className={styles.row}>
+              {tags.slice(0, 3).map((t) => (
+                <div key={t} className={styles.item}>
+                  {t}
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className={styles.cta}>
+            View Event <span className={styles.arrow}>→</span>
+          </div>
         </div>
       </div>
     </Reveal>

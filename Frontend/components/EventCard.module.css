@@ -1,0 +1,316 @@
+.wrap {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .card {
+    /* The notch is drawn with box-shadows in this colour, so it must match the
+       card background exactly. Change it here and everything stays in sync. */
+    --ec-bg: #17121f;
+  
+    width: 100%;
+    border-radius: 20px;
+    background: var(--ec-bg);
+    padding: 5px;
+    overflow: hidden;
+    border: 1px solid rgba(170, 18, 16, 0.35);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      box-shadow 0.3s ease;
+  }
+  
+  .wrap:hover .card,
+  .wrap:focus-visible .card {
+    transform: scale(1.03);
+    box-shadow: 0 14px 34px rgba(170, 18, 16, 0.3);
+  }
+  
+  .wrap:focus-visible .card {
+    outline: 2px solid var(--color-brand-red-bright, #ff4a3d);
+    outline-offset: 4px;
+  }
+  
+  /* ---------- Top section (gradient + tab) ---------- */
+  
+  .top {
+    height: 160px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #221b2d; /* neutral placeholder until an image is set */
+  }
+  
+  .big .top {
+    height: 190px;
+  }
+  
+  .tab {
+    border-bottom-right-radius: 10px;
+    height: 30px;
+    width: 150px;
+    background: var(--ec-bg);
+    position: relative;
+    transform: skew(-40deg);
+    box-shadow: -10px -10px 0 0 var(--ec-bg);
+    z-index: 1;
+  }
+  
+  .tab::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0;
+    right: -15px;
+    background: rgba(255, 255, 255, 0);
+    border-top-left-radius: 10px;
+    box-shadow: -5px -5px 0 2px var(--ec-bg);
+  }
+  
+  .top::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: rgba(255, 255, 255, 0);
+    height: 15px;
+    width: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: -5px -5px 0 2px var(--ec-bg);
+    z-index: 1;
+  }
+  
+  .tabRow {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+  }
+  
+  .tabLabel {
+    padding-left: 15px;
+    max-width: 125px;
+    font-family: var(--font-head, inherit);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dateNote {
+    padding-right: 15px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* ---------- Header image ---------- */
+  
+  .media {
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .photo {
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  
+  .wrap:hover .photo {
+    transform: scale(1.08);
+  }
+  
+  /* Darkens the photo so the date and labels stay readable */
+  .shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(10, 6, 14, 0.9) 0%,
+      rgba(10, 6, 14, 0.45) 50%,
+      rgba(10, 6, 14, 0.3) 100%
+    );
+  }
+  
+  /* Ghost number sits behind the date, clipped to the gradient */
+  .ghostClip {
+    position: absolute;
+    inset: 0;
+    border-radius: 15px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .ghost {
+    position: absolute;
+    right: -8px;
+    bottom: -34px;
+    font-family: var(--font-head, inherit);
+    font-weight: 700;
+    font-size: 140px;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.35);
+    user-select: none;
+    transition: transform 0.5s ease;
+  }
+  
+  .wrap:hover .ghost {
+    transform: translate(-6px, -4px);
+  }
+  
+  .meta {
+    position: absolute;
+    left: 18px;
+    bottom: 14px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  }
+  
+  .date {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  
+  .time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-head, inherit);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .time svg {
+    width: 13px;
+    height: 13px;
+    flex: none;
+  }
+  
+  .day {
+    font-family: var(--font-head, inherit);
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 0.9;
+  }
+  
+  .big .day {
+    font-size: 68px;
+  }
+  
+  .month {
+    font-family: var(--font-head, inherit);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+  }
+  
+  /* ---------- Bottom section ---------- */
+  
+  .bottom {
+    margin-top: 15px;
+    padding: 10px 8px 6px;
+  }
+  
+  .name {
+    display: block;
+    font-family: var(--font-head, inherit);
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  .big .name {
+    font-size: 28px;
+  }
+  
+  .desc {
+    margin: 12px 0 0;
+    text-align: center;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-brand-text-dim, rgba(225, 218, 240, 0.65));
+  }
+  
+  .row {
+    display: flex;
+    margin-top: 18px;
+  }
+  
+  .item {
+    flex: 1;
+    text-align: center;
+    padding: 5px 4px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(200, 180, 245, 0.8);
+  }
+  
+  .item + .item {
+    border-left: 1px solid rgba(255, 255, 255, 0.126);
+  }
+  
+  .cta {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.126);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-head, inherit);
+    font-size: 12.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-brand-lav, #c9b6ff);
+  }
+  
+  .arrow {
+    color: var(--color-brand-red-bright, #ff4a3d);
+    transition: transform 0.3s ease;
+  }
+  
+  .wrap:hover .arrow {
+    transform: translateX(6px);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .card,
+    .ghost,
+    .photo,
+    .arrow {
+      transition: none;
+    }
+    .wrap:hover .card,
+    .wrap:focus-visible .card,
+    .wrap:hover .ghost,
+    .wrap:hover .photo,
+    .wrap:hover .arrow {
+      transform: none;
+    }
+  }
