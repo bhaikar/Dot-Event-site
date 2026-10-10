@@ -191,18 +191,19 @@ export default function RegisterForm({ eventName }) {
       />
 
       <div className="form-row mb-5">
-        <label className="flex items-center gap-2.5 cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={values.whatsappSame}
-            onChange={(e) => update("whatsappSame", e.target.checked)}
-            className="accent-brand-red-bright w-4 h-4"
-          />
-          <span className="font-head text-[11.5px] tracking-[0.12em] uppercase text-brand-rose">
-            WhatsApp number same as phone
-          </span>
-        </label>
-      </div>
+  <label className="flex items-center gap-3 cursor-pointer select-none w-fit">
+    <input
+      type="checkbox"
+      checked={values.whatsappSame}
+      onChange={(e) => update("whatsappSame", e.target.checked)}
+      className="accent-brand-red-bright cursor-pointer"
+      style={{ width: 18, height: 18, padding: 0, margin: 0, flex: "none" }}
+    />
+    <span className="font-head text-[11.5px] tracking-[0.12em] uppercase text-brand-rose">
+      WhatsApp number same as phone
+    </span>
+  </label>
+</div>
 
       {!values.whatsappSame && (
         <Field
@@ -264,42 +265,57 @@ export default function RegisterForm({ eventName }) {
 
       {/* Terms checkbox */}
       <div className={`form-row mb-5 ${errors.terms ? "invalid" : ""}`}>
-        <label className="flex items-start gap-2.5 cursor-pointer select-none">
-          <input
-            type="checkbox"
-            checked={values.terms}
-            onChange={(e) => update("terms", e.target.checked)}
-            className="accent-brand-red-bright w-4 h-4 mt-0.5 flex-none"
-          />
-          <span className="text-[13px] text-brand-text-dim leading-relaxed">
-            I have read and agree to the{" "}
-            <strong className="text-brand-lav">Terms &amp; Conditions</strong>. I confirm the
-            information provided is accurate.
-          </span>
-        </label>
-        {errors.terms && (
-          <div className="text-[12px] mt-1.5 ml-6.5 font-head" style={{ color: "#e98a86" }}>
-            {errors.terms}
-          </div>
-        )}
-      </div>
+  <label className="flex items-start gap-3 cursor-pointer select-none w-full">
+    <input
+      type="checkbox"
+      checked={values.terms}
+      onChange={(e) => update("terms", e.target.checked)}
+      className="accent-brand-red-bright cursor-pointer"
+      style={{ width: 18, height: 18, padding: 0, margin: "2px 0 0 0", flex: "none" }}
+    />
+    <span className="text-[13px] text-brand-text-dim leading-relaxed flex-1">
+      I have read and agree to the{" "}
+      <strong className="text-brand-lav">Terms &amp; Conditions</strong>. I confirm the
+      information provided is accurate.
+    </span>
+  </label>
+  {errors.terms && (
+    <div className="text-[12px] mt-1.5 font-head" style={{ color: "#e98a86", marginLeft: 30 }}>
+      {errors.terms}
+    </div>
+  )}
+</div>
 
       <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
         {submitting ? "Redirecting to Payment…" : "Continue to Payment →"}
       </button>
 
       <div
-        className="flex gap-2.5 py-3.5 px-4 rounded-[10px] border text-[12.5px] text-brand-text-dim mt-5.5"
-        style={{ borderColor: "var(--color-line)", background: "rgba(225,214,233,0.04)" }}
-      >
-        <span className="flex-none">
-          <CheckIcon />
-        </span>
-        <span>
-          Your information is collected only for event coordination by DOT DevOps Team and will not
-          be shared with third parties.
-        </span>
-      </div>
+  className="flex gap-3 py-4 px-4.5 rounded-[10px] border text-[13px] text-brand-text-dim leading-relaxed mt-5.5"
+  style={{
+    borderColor: "rgba(220,38,38,0.45)",
+    borderLeft: "4px solid var(--color-red-bright)",
+    background:
+      "linear-gradient(90deg, rgba(170,18,16,0.18), rgba(170,18,16,0.04))",
+    boxShadow: "0 0 22px rgba(220,38,38,0.12)",
+  }}
+>
+  <span
+    className="flex-none w-7 h-7 rounded-full flex items-center justify-center mt-0.5"
+    style={{
+      background: "rgba(220,38,38,0.2)",
+      color: "var(--color-red-bright)",
+    }}
+  >
+    <CheckIcon />
+  </span>
+  <span>
+    Your information is collected{" "}
+    <strong className="text-brand-lav">only for event coordination</strong> by DOT
+    DevOps Team and{" "}
+    <strong className="text-brand-lav">will not be shared with third parties</strong>.
+  </span>
+</div>
     </form>
   );
 }

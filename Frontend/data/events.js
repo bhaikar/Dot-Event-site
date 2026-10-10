@@ -1,3 +1,7 @@
+// Overall event window (all events fall inside this range)
+export const EVENT_DATES = "2–7 Nov 2026";
+export const EVENT_DATES_SHORT = "2–7 Nov";
+
 export const hackathonCfg = {
   slug: "hackathon",
   name: "Hackathon",
@@ -7,6 +11,13 @@ export const hackathonCfg = {
   teamSize: "Up to 4 members",
   mode: "On-Campus",
   status: "Registrations Open",
+  code: "01",
+  duration: "24H Build",
+  tags: ["Build", "Code", "Collaborate"],
+  dates: "5–6 Nov 2026",
+  kickoff: "11:00 AM IST",
+  // TODO: placeholder — final prize pool not decided yet. Update before launch.
+  prizePool: "₹10,000",
   registerHref: "/events/hackathon/register",
   ctaVerb: "Build",
   about:
@@ -25,10 +36,10 @@ export const hackathonCfg = {
     "Respect the code of conduct — harassment of any kind is not tolerated.",
   ],
   timeline: [
-    { time: "Day 00", title: "Registrations Open", desc: "Team registration window opens online." },
-    { time: "Day 01", title: "Check-in & Kickoff", desc: "Team check-in, problem statement reveal and opening ceremony." },
-    { time: "Build Window", title: "Hacking Begins", desc: "Teams design, build and iterate with mentor support available." },
-    { time: "Final Day", title: "Submissions & Judging", desc: "Project submissions close, followed by judging and final showcase." },
+    { time: "Now Open", title: "Registrations Open", desc: "Team registration window opens online." },
+    { time: "5 Nov", title: "Check-in & Kickoff", desc: "Team check-in, problem statement reveal and opening ceremony." },
+    { time: "5–6 Nov", title: "Hacking Begins", desc: "Teams design, build and iterate with mentor support available." },
+    { time: "6 Nov", title: "Submissions & Judging", desc: "Project submissions close, followed by judging and final showcase." },
   ],
   eligibility: [
     "Open to currently enrolled college / university students.",
@@ -51,6 +62,12 @@ export const gamethonCfg = {
   teamSize: "Format-dependent",
   mode: "On-Campus",
   status: "Registrations Open",
+  code: "02",
+  duration: "1 Day",
+  tags: ["Create", "Play", "Compete"],
+  dates: "7 Nov 2026",
+  kickoff: "10:30 AM IST",
+  prizePool: "TBA",
   registerHref: "/events/gamethon/register",
   ctaVerb: "Compete",
   about:
@@ -68,10 +85,10 @@ export const gamethonCfg = {
     "Respect opponents and organizers — the code of conduct applies to all.",
   ],
   timeline: [
-    { time: "Day 00", title: "Registrations Open", desc: "Participant / team registration window opens online." },
-    { time: "Day 01", title: "Check-in & Briefing", desc: "Participant check-in and rules briefing before play begins." },
-    { time: "Bracket Rounds", title: "Competition Begins", desc: "Matches proceed through the bracket / challenge format." },
-    { time: "Final Day", title: "Finals & Results", desc: "Top competitors face off, followed by results and closing." },
+    { time: "Now Open", title: "Registrations Open", desc: "Participant / team registration window opens online." },
+    { time: "7 Nov", title: "Check-in & Briefing", desc: "Participant check-in and rules briefing before play begins." },
+    { time: "7 Nov", title: "Competition Begins", desc: "Matches proceed through the bracket / challenge format." },
+    { time: "7 Nov", title: "Finals & Results", desc: "Top competitors face off, followed by results and closing." },
   ],
   eligibility: [
     "Open to currently enrolled college / university students.",

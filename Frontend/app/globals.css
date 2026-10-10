@@ -384,3 +384,10 @@ h1, h2, h3, h4 {
   break-inside: avoid;
   margin-bottom: 16px;
 }
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  flex: none;
+}

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { galleryData, galleryFilters } from "@/data/gallery";
-import { ImgIcon, CloseIcon } from "./Icons";
+import { CloseIcon } from "./Icons";
 
 export default function GalleryGrid() {
   const [filter, setFilter] = useState("all");
@@ -37,16 +37,12 @@ export default function GalleryGrid() {
             className="masonry-item rounded-2xl overflow-hidden relative cursor-pointer border group"
             style={{ borderColor: "var(--color-line)" }}
           >
-            <div
-              className="w-full flex items-center justify-center flex-col gap-2 relative font-head text-[11px] tracking-[0.1em] uppercase text-white/55"
-              style={{
-                height: g.h,
-                background: "linear-gradient(150deg, rgba(170,18,16,0.22), rgba(60,47,55,0.5))",
-              }}
-            >
-              <ImgIcon className="opacity-60" />
-              <span>Image Placeholder</span>
-            </div>
+            <img
+              src={g.src}
+              alt={g.t}
+              className="w-full object-cover"
+              style={{ height: g.h }}
+            />
             <div
               className="absolute left-0 right-0 bottom-0 p-3.5 font-head text-[11px] tracking-[0.08em] uppercase text-brand-lav opacity-0 group-hover:opacity-100 transition-opacity"
               style={{ background: "linear-gradient(0deg, rgba(20,14,17,0.85), transparent)" }}
@@ -72,16 +68,12 @@ export default function GalleryGrid() {
             <CloseIcon />
           </button>
           <div className="max-w-[640px] w-full text-center" onClick={(e) => e.stopPropagation()}>
-            <div
-              className="w-full flex items-center justify-center flex-col gap-2 rounded-2xl font-head text-[11px] tracking-[0.1em] uppercase text-white/55"
-              style={{
-                height: 320,
-                background: "linear-gradient(150deg, rgba(170,18,16,0.22), rgba(60,47,55,0.5))",
-              }}
-            >
-              <ImgIcon className="opacity-60" />
-              <span>Image Placeholder</span>
-            </div>
+            <img
+              src={active.src}
+              alt={active.t}
+              className="w-full rounded-2xl object-cover"
+              style={{ height: 320 }}
+            />
             <p className="mt-4.5 font-head tracking-[0.08em] uppercase">{active.t}</p>
           </div>
         </div>

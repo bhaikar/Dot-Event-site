@@ -1,0 +1,36 @@
+/* HUD event card: border ring, traveling beam, dot texture */
+@keyframes borderBeam {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Faint static ring so the border still reads when the beam is off */
+.ring {
+  background: rgba(127, 29, 29, 0.35);
+  box-shadow: 0 0 50px rgba(220, 38, 38, 0.25);
+}
+
+.beam {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0 300deg,
+    #dc2626 330deg,
+    #ffffff 350deg,
+    transparent 360deg
+  );
+  animation: borderBeam 4s linear infinite;
+}
+
+.dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 70%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beam {
+    animation: none;
+    opacity: 0;
+  }
+}
