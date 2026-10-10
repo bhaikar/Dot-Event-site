@@ -1,0 +1,484 @@
+/* =====================================================
+   PAYMENT GATE  -  DOT DevOps Team theme
+   Same look as the Hack.MCE site and the registration page.
+
+   FONTS: set --font-head to the font used on the site
+   (and load it in the HTML <head>) to match exactly.
+===================================================== */
+
+:root {
+    --bg-0: #100a0e;
+    --surface: #271d22;
+
+    --red: #aa1210;
+    --red-hot: #c41c1a;
+    --red-bright: #ff4a3d;
+    --burgundy: #6c1b1c;
+    --rose: #a77a83;
+    --lav: #e1d6e9;
+
+    --text: #f3ecf2;
+    --text-dim: rgba(225, 218, 240, 0.65);
+
+    --line: rgba(225, 214, 233, 0.12);
+    --line-red: rgba(170, 18, 16, 0.4);
+    --glow: rgba(196, 28, 26, 0.45);
+
+    --ok: #4ade80;
+
+    --font-head: "Orbitron", "Rajdhani", "Segoe UI", Arial, sans-serif;
+    --font-body: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--bg-0);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 24px 16px;
+
+    background: transparent;
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---- backdrop: wine-black base + crimson bloom ---- */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(120% 100% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(8, 4, 6, 0.65) 100%),
+        radial-gradient(55% 70% at 77% 40%, rgba(170, 18, 16, 0.30) 0%, rgba(108, 27, 28, 0.12) 42%, rgba(108, 27, 28, 0) 72%),
+        radial-gradient(50% 55% at 6% 0%, rgba(108, 27, 28, 0.30) 0%, rgba(108, 27, 28, 0) 70%),
+        linear-gradient(180deg, #1d1419 0%, #150e12 55%, #100a0e 100%);
+}
+
+/* ---- blueprint dot grid ---- */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(225, 214, 233, 0.16) 1px, rgba(225, 214, 233, 0) 1.5px);
+    background-size: 32px 32px;
+    background-position: -16px -16px;
+    -webkit-mask-image: linear-gradient(to right, transparent 12%, #000 72%);
+    mask-image: linear-gradient(to right, transparent 12%, #000 72%);
+}
+
+/* =====================================================
+   PAYMENT PANEL (with corner brackets)
+===================================================== */
+
+.payment-box {
+    position: relative;
+
+    width: 100%;
+    max-width: 440px;
+    padding: 32px 28px 8px;
+
+    background: rgba(39, 29, 34, 0.80);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+}
+
+.payment-box::before,
+.payment-box::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.payment-box::before {
+    top: 10px;
+    left: 10px;
+    border-top: 2px solid var(--red-bright);
+    border-left: 2px solid var(--red-bright);
+    border-top-left-radius: 6px;
+}
+
+.payment-box::after {
+    right: 10px;
+    bottom: 10px;
+    border-right: 2px solid var(--red-bright);
+    border-bottom: 2px solid var(--red-bright);
+    border-bottom-right-radius: 6px;
+}
+
+h2 {
+    margin: 0 0 8px;
+
+    text-align: center;
+
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+
+    text-shadow: 0 0 22px rgba(196, 28, 26, 0.4);
+}
+
+.instruction {
+    margin-bottom: 24px;
+
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dim);
+}
+
+/* =====================================================
+   RECEIVER
+===================================================== */
+
+.receiver {
+    margin-bottom: 18px;
+    padding: 16px 18px;
+
+    background: rgba(225, 214, 233, 0.05);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--red-bright);
+    border-radius: 12px;
+}
+
+.receiver-label {
+    font-family: var(--font-head);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rose);
+}
+
+.receiver-name {
+    margin-top: 6px;
+
+    font-family: var(--font-head);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
+}
+
+.upi-id {
+    margin-top: 5px;
+
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: var(--text-dim);
+}
+
+/* =====================================================
+   AMOUNT
+===================================================== */
+
+.amount {
+    margin: 18px 0;
+    padding: 14px 10px;
+
+    text-align: center;
+
+    background: linear-gradient(150deg, rgba(170, 18, 16, 0.18), rgba(108, 27, 28, 0.10));
+    border: 1px solid var(--line-red);
+    border-radius: 14px;
+
+    font-family: var(--font-head);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #fff;
+
+    text-shadow: 0 0 20px rgba(196, 28, 26, 0.45);
+}
+
+/* =====================================================
+   QR CODE AREA
+===================================================== */
+
+.qr-section {
+    width: 100%;
+    margin-bottom: 26px;
+    padding: 20px;
+
+    text-align: center;
+
+    background: rgba(16, 10, 14, 0.45);
+    border: 1px dashed var(--line-red);
+    border-radius: 14px;
+}
+
+.qr-title {
+    margin-bottom: 16px;
+
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lav);
+}
+
+/* stays white: a QR code needs a light background to be scannable */
+.qr-box {
+    width: 270px;
+    height: 270px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+    border: 3px solid var(--red-bright);
+    border-radius: 14px;
+    box-shadow: 0 0 34px -6px var(--glow);
+}
+
+.qr-box img,
+.qr-box canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.qr-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.qr-help {
+    margin-top: 14px;
+
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text-dim);
+}
+
+/* =====================================================
+   UTR INPUT
+===================================================== */
+
+.field {
+    margin-top: 5px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 9px;
+
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rose);
+}
+
+.field input {
+    width: 100%;
+    height: 52px;
+    padding: 10px 14px;
+
+    background: rgba(16, 10, 14, 0.6);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    outline: none;
+
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 18px;
+    letter-spacing: 3px;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input::placeholder {
+    font-size: 14px;
+    letter-spacing: 0;
+    color: rgba(225, 218, 240, 0.32);
+}
+
+.field input:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(167, 122, 131, 0.22);
+}
+
+.field input.valid {
+    border-color: var(--ok);
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.12);
+}
+
+.field input.invalid {
+    border-color: var(--red-bright);
+    box-shadow: 0 0 0 3px rgba(255, 74, 61, 0.14);
+}
+
+/* locked after a successful submit */
+.field input:read-only {
+    background: rgba(225, 214, 233, 0.06);
+    color: var(--text-dim);
+    cursor: not-allowed;
+}
+
+.help {
+    margin-top: 8px;
+
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+#submitBtn,
+#downloadBtn {
+    width: 100%;
+    height: 52px;
+    margin-top: 16px;
+
+    border-radius: 11px;
+
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* primary */
+#submitBtn {
+    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));
+    border: none;
+    box-shadow: 0 12px 28px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+#submitBtn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* secondary (ghost) */
+#downloadBtn {
+    background: rgba(170, 18, 16, 0.10);
+    border: 1px solid var(--line-red);
+    color: var(--lav);
+}
+
+#downloadBtn:not(:disabled):hover {
+    background: rgba(170, 18, 16, 0.25);
+    box-shadow: 0 0 22px -6px var(--glow);
+}
+
+/* disabled */
+#submitBtn:disabled,
+#downloadBtn:disabled {
+    background: rgba(225, 214, 233, 0.06);
+    border: 1px solid var(--line);
+    box-shadow: none;
+    color: rgba(225, 218, 240, 0.30);
+    cursor: not-allowed;
+}
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.message {
+    margin-top: 16px;
+
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.message:empty {
+    display: none;
+}
+
+.success {
+    color: var(--ok);
+}
+
+.error {
+    color: #ff8f88;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    margin-top: 26px;
+    padding: 24px 10px 26px;
+
+    border-top: 1px solid var(--line);
+
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+}
+
+.footer div div:last-child {
+    color: var(--rose) !important;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .payment-box {
+        padding: 28px 18px 4px;
+    }
+
+    .qr-section {
+        padding: 16px 12px;
+    }
+
+    .qr-box {
+        width: 240px;
+        height: 240px;
+    }
+
+    .amount {
+        font-size: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

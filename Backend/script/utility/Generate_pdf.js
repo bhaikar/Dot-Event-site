@@ -123,7 +123,7 @@ async function downloadReceiptPdf() {
     }
 
     const id = doc.getElementById("receiptNumber").textContent.trim() || "receipt";
-    pdf.save(`DOT_Provisional_Receipt_${id}.pdf`);
+    pdf.save(`DOT_Provisional_Receipt.pdf`);
   } finally {
     frame.remove();
   }

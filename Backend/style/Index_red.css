@@ -1,0 +1,1095 @@
+/* =====================================================
+   INDEX (Team Registration)  -  DOT DevOps Team theme
+   Matches the Hack.MCE site: wine-black background, blueprint
+   dot grid, crimson accents, lavender text, panel corner brackets.
+
+   FONTS: the site uses a "head" font for uppercase labels.
+   Set --font-head to the same font you use on the site and
+   load it in the HTML <head>, for example:
+   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+===================================================== */
+
+:root {
+    /* surfaces */
+    --bg-0: #100a0e;
+    --bg-1: #150e12;
+    --bg-2: #1d1419;
+    --surface: #271d22;
+    --surface-2: #17121f;
+
+    /* brand */
+    --red: #aa1210;
+    --red-hot: #c41c1a;
+    --red-bright: #ff4a3d;
+    --burgundy: #6c1b1c;
+    --rose: #a77a83;
+    --lav: #e1d6e9;
+
+    /* text */
+    --text: #f3ecf2;
+    --text-dim: rgba(225, 218, 240, 0.65);
+
+    /* lines & glow */
+    --line: rgba(225, 214, 233, 0.12);
+    --line-red: rgba(170, 18, 16, 0.4);
+    --glow: rgba(196, 28, 26, 0.45);
+
+    /* status */
+    --ok: #4ade80;
+
+    --font-head: "Orbitron", "Rajdhani", "Segoe UI", Arial, sans-serif;
+    --font-body: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--bg-0);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    color: var(--text);
+    background: transparent;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---- backdrop: wine-black base + crimson bloom ---- */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(120% 100% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(8, 4, 6, 0.65) 100%),
+        radial-gradient(55% 70% at 77% 40%, rgba(170, 18, 16, 0.30) 0%, rgba(108, 27, 28, 0.12) 42%, rgba(108, 27, 28, 0) 72%),
+        radial-gradient(50% 55% at 6% 0%, rgba(108, 27, 28, 0.30) 0%, rgba(108, 27, 28, 0) 70%),
+        linear-gradient(180deg, #1d1419 0%, #150e12 55%, #100a0e 100%);
+}
+
+/* ---- blueprint dot grid ---- */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(225, 214, 233, 0.16) 1px, rgba(225, 214, 233, 0) 1.5px);
+    background-size: 32px 32px;
+    background-position: -16px -16px;
+    -webkit-mask-image: linear-gradient(to right, transparent 12%, #000 72%);
+    mask-image: linear-gradient(to right, transparent 12%, #000 72%);
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+    width: min(1240px, calc(100% - 32px));
+    height: 66px;
+    margin: 16px auto 0;
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(39, 29, 34, 0.72);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-family: var(--font-head);
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+/* the "DOT" badge */
+.logo::before {
+    content: "DOT";
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: linear-gradient(150deg, var(--red-bright), var(--burgundy));
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14) inset, 0 6px 16px -6px var(--glow);
+
+    font-size: 13px;
+    color: #fff;
+}
+
+.nav-text {
+    font-family: var(--font-head);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+    text-align: center;
+    padding: 70px 20px 34px;
+}
+
+/* eyebrow pill */
+.hero::before {
+    content: "Hack.MCE 6.0  /  Registration";
+
+    display: table;
+    margin: 0 auto 20px;
+    padding: 7px 16px;
+
+    border: 1px solid var(--line-red);
+    border-radius: 999px;
+    background: rgba(170, 18, 16, 0.1);
+
+    font-family: var(--font-head);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lav);
+}
+
+.hero h1 {
+    margin: 0 0 12px;
+
+    font-family: var(--font-head);
+    font-size: clamp(30px, 6vw, 54px);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    color: #fff;
+
+    text-shadow: 0 0 28px rgba(196, 28, 26, 0.35);
+}
+
+.hero p {
+    margin: 0 auto;
+    max-width: 480px;
+
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+}
+
+/* =====================================================
+   FORM PANEL  (with corner brackets)
+===================================================== */
+
+.form-container {
+    position: relative;
+
+    width: min(700px, calc(100% - 30px));
+    margin: 10px auto 60px;
+
+    background: rgba(39, 29, 34, 0.78);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+}
+
+.form-container::before,
+.form-container::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.form-container::before {
+    top: 10px;
+    left: 10px;
+    border-top: 2px solid var(--red-bright);
+    border-left: 2px solid var(--red-bright);
+    border-top-left-radius: 6px;
+}
+
+.form-container::after {
+    right: 10px;
+    bottom: 10px;
+    border-right: 2px solid var(--red-bright);
+    border-bottom: 2px solid var(--red-bright);
+    border-bottom-right-radius: 6px;
+}
+
+.form-body {
+    padding: 38px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 0 0 22px;
+
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.section-title::before {
+    content: "";
+    width: 4px;
+    height: 18px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--red-bright), var(--burgundy));
+}
+
+/* =====================================================
+   FIELDS
+===================================================== */
+
+.field {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rose);
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px 14px;
+
+    background: rgba(16, 10, 14, 0.6);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+input::placeholder {
+    color: rgba(225, 218, 240, 0.32);
+}
+
+input:hover,
+select:hover {
+    border-color: rgba(225, 214, 233, 0.24);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--rose);
+    background: rgba(16, 10, 14, 0.8);
+    box-shadow: 0 0 0 3px rgba(167, 122, 131, 0.22);
+}
+
+/* stop the browser's blue/yellow autofill colours */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text);
+    -webkit-box-shadow: 0 0 0 1000px #1b1318 inset;
+    caret-color: var(--text);
+}
+
+.field-hint {
+    margin: -2px 0 10px;
+    font-size: 13px;
+    color: var(--text-dim);
+}
+
+.field-hint.email-hint {
+    margin: 8px 0 0;
+    padding-left: 2px;
+    line-height: 1.5;
+}
+
+/* email: red while the typed address is invalid, green when valid */
+#email:not(:placeholder-shown):invalid {
+    border-color: var(--red-bright);
+    box-shadow: 0 0 0 3px rgba(255, 74, 61, 0.14);
+}
+
+#email:not(:placeholder-shown):valid {
+    border-color: var(--ok);
+}
+
+/* =====================================================
+   TEAM MEMBERS
+===================================================== */
+
+.members-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin: 32px 0 16px;
+    padding-top: 24px;
+
+    border-top: 1px dashed var(--line);
+}
+
+.members-header h2 {
+    margin: 0;
+
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.member {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.member input {
+    padding-right: 52px;
+}
+
+.remove-btn {
+    position: absolute;
+    right: 8px;
+    bottom: 7px;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    background: rgba(170, 18, 16, 0.2);
+    border: 1px solid var(--line-red);
+    border-radius: 8px;
+
+    color: #ff8f88;
+    font-size: 18px;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.remove-btn:hover {
+    background: rgba(170, 18, 16, 0.4);
+    color: #fff;
+}
+
+#addMember {
+    padding: 10px 15px;
+
+    background: rgba(170, 18, 16, 0.1);
+    border: 1px solid var(--line-red);
+    border-radius: 9px;
+
+    color: var(--lav);
+    font-family: var(--font-head);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#addMember:hover:not(:disabled) {
+    background: rgba(170, 18, 16, 0.25);
+    box-shadow: 0 0 18px -4px var(--glow);
+}
+
+#addMember:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* =====================================================
+   TICKET SECTION
+===================================================== */
+
+.ticket-section {
+    margin-top: 30px;
+    padding-top: 26px;
+    border-top: 1px dashed var(--line);
+}
+
+/* =====================================================
+   SELECT TICKET (custom dropdown)
+===================================================== */
+
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+/* real <select>: invisible but focusable, so the browser's
+   "please select an item" message appears at the dropdown */
+#ticket {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dropdown-selected {
+    width: 100%;
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 10px 14px;
+
+    background: rgba(16, 10, 14, 0.6);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.dropdown-selected:hover {
+    border-color: rgba(225, 214, 233, 0.24);
+}
+
+.custom-dropdown.active .dropdown-selected {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(167, 122, 131, 0.22);
+}
+
+.selected-content {
+    display: flex;
+    align-items: center;
+}
+
+.selected-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.selected-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.selected-price {
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+/* chevron */
+.arrow {
+    flex-shrink: 0;
+
+    width: 9px;
+    height: 9px;
+
+    font-size: 0;
+    color: transparent;
+
+    border-right: 2px solid var(--rose);
+    border-bottom: 2px solid var(--rose);
+
+    transform: rotate(45deg);
+    margin: -4px 4px 0 0;
+
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.custom-dropdown.active .arrow {
+    transform: rotate(225deg);
+    margin-top: 4px;
+    border-color: var(--red-bright);
+}
+
+.dropdown-options {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+
+    padding: 6px;
+
+    background: #1d1519;
+    border: 1px solid var(--line-red);
+    border-radius: 12px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+
+    transition: all 0.2s ease;
+
+    z-index: 100;
+}
+
+.custom-dropdown.active .dropdown-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 14px;
+    margin-bottom: 2px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.dropdown-option:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-option:hover {
+    background: rgba(225, 214, 233, 0.06);
+}
+
+.dropdown-option.selected {
+    background: rgba(170, 18, 16, 0.16);
+    border-color: var(--line-red);
+}
+
+.option-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.option-name {
+    font-family: var(--font-head);
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.dropdown-option.selected .option-name {
+    color: var(--lav);
+}
+
+.option-description {
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+.option-price {
+    margin-left: auto;
+    padding: 4px 11px;
+
+    background: rgba(225, 214, 233, 0.08);
+    border-radius: 20px;
+
+    font-family: var(--font-head);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--lav);
+}
+
+.dropdown-option.selected .option-price {
+    background: rgba(170, 18, 16, 0.35);
+    color: #fff;
+}
+
+/* tick circle (space is always reserved so nothing shifts) */
+.check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    visibility: hidden;
+}
+
+.dropdown-option.selected .check {
+    visibility: visible;
+}
+
+/* =====================================================
+   RULEBOOK CARD
+===================================================== */
+
+.rulebook-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin: 12px 0 0;
+    padding: 22px 24px;
+
+    background: linear-gradient(150deg, rgba(170, 18, 16, 0.18), rgba(108, 27, 28, 0.10));
+    border: 1px solid var(--line-red);
+    border-radius: 14px;
+}
+
+.rulebook-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.rulebook-text strong {
+    font-family: var(--font-head);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.rulebook-text span {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-dim);
+}
+
+.rulebook-btn {
+    flex-shrink: 0;
+
+    padding: 11px 17px;
+
+    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));
+    border-radius: 9px;
+    box-shadow: 0 8px 20px -8px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: 0.2s;
+}
+
+.rulebook-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px -8px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* =====================================================
+   AGREEMENTS (checkboxes)
+===================================================== */
+
+.agreements {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    margin: 24px 0 0;
+}
+
+.agreement {
+    margin: 10px 0 0;
+    padding: 18px 20px;
+
+    background: rgba(225, 214, 233, 0.04);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+
+    transition: 0.2s;
+}
+
+.agreement:hover {
+    border-color: rgba(225, 214, 233, 0.24);
+}
+
+/* highlight the card when ticked */
+.agreement:has(input:checked) {
+    background: rgba(170, 18, 16, 0.12);
+    border-color: var(--line-red);
+}
+
+.agreement label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    margin: 0;
+
+    cursor: pointer;
+
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.6;
+    color: var(--text-dim);
+}
+
+/* custom checkbox */
+.agreement input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+
+    position: relative;
+    flex-shrink: 0;
+
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    margin-top: 1px;
+
+    background: rgba(16, 10, 14, 0.6);
+    border: 2px solid rgba(225, 214, 233, 0.35);
+    border-radius: 6px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.agreement input[type="checkbox"]:hover {
+    border-color: var(--red-bright);
+}
+
+.agreement input[type="checkbox"]:checked {
+    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));
+    border-color: var(--red-bright);
+}
+
+.agreement input[type="checkbox"]:checked::after {
+    content: "";
+
+    position: absolute;
+    left: 6px;
+    top: 2px;
+
+    width: 5px;
+    height: 11px;
+
+    border: solid #fff;
+    border-width: 0 2.5px 2.5px 0;
+
+    transform: rotate(45deg);
+}
+
+.agreement input[type="checkbox"]:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 74, 61, 0.28);
+}
+
+.agreement strong {
+    color: var(--lav);
+}
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
+.submit-btn {
+    width: 100%;
+    margin-top: 32px;
+    padding: 15px;
+
+    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));
+    border: none;
+    border-radius: 11px;
+    box-shadow: 0 12px 28px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.message {
+    display: none;
+    margin-top: 16px;
+    padding: 13px;
+
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    border-radius: 10px;
+
+    color: var(--ok);
+    text-align: center;
+    font-size: 14px;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    padding: 28px 30px 34px;
+
+    border-top: 1px solid var(--line);
+
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+}
+
+.footer div div:last-child {
+    color: var(--rose) !important;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 0 14px;
+    }
+
+    .nav-text {
+        display: none;
+    }
+
+    .hero {
+        padding: 46px 20px 26px;
+    }
+
+    .form-body {
+        padding: 28px 20px;
+    }
+
+    .members-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #addMember {
+        width: 100%;
+    }
+
+    .rulebook-card {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .rulebook-btn {
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+
+/* =====================================================
+   ANIMATIONS  (same feel as the Hack.MCE site)
+   - Reveal: fade + rise, staggered (site <Reveal delay=...>)
+   - Pulsing eyebrow dot
+   - Bouncy hover easing used on the event cards
+===================================================== */
+
+@keyframes reveal-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal-soft {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-dot {
+    0%, 100% { background-size: 8px 8px, auto;  background-position: 15px 50%, 0 0; }
+    50%      { background-size: 4px 4px, auto;  background-position: 17px 50%, 0 0; }
+}
+
+@keyframes bracket-glow {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+}
+
+/* ---- hero ---- */
+.hero::before {
+    padding-left: 34px;
+    background:
+        radial-gradient(circle, #ff4a3d 0 55%, rgba(255, 74, 61, 0) 62%) no-repeat 15px 50% / 8px 8px,
+        rgba(170, 18, 16, 0.1);
+
+    animation:
+        reveal-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both,
+        pulse-dot 1.8s ease-in-out infinite;
+}
+
+.hero h1 {
+    animation: reveal-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both;
+}
+
+.hero p {
+    animation: reveal-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.14s both;
+}
+
+/* ---- form panel + staggered children ---- */
+.form-container {
+    animation: reveal-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both;
+}
+
+.form-container::before,
+.form-container::after {
+    animation: bracket-glow 3.2s ease-in-out infinite;
+}
+
+.form-body > * {
+    animation: reveal-soft 0.55s ease both;
+}
+
+.form-body > *:nth-child(1)  { animation-delay: 0.35s; }
+.form-body > *:nth-child(2)  { animation-delay: 0.40s; }
+.form-body > *:nth-child(3)  { animation-delay: 0.45s; }
+.form-body > *:nth-child(4)  { animation-delay: 0.50s; }
+.form-body > *:nth-child(5)  { animation-delay: 0.55s; }
+.form-body > *:nth-child(6)  { animation-delay: 0.60s; }
+.form-body > *:nth-child(7)  { animation-delay: 0.65s; }
+.form-body > *:nth-child(8)  { animation-delay: 0.70s; }
+.form-body > *:nth-child(n+9) { animation-delay: 0.75s; }
+
+/* new team member row slides in */
+.member {
+    animation: reveal-soft 0.35s ease both;
+}
+
+/* dropdown options cascade in when it opens */
+.custom-dropdown.active .dropdown-option {
+    animation: reveal-soft 0.3s ease both;
+}
+
+.custom-dropdown.active .dropdown-option:nth-child(1) { animation-delay: 0.03s; }
+.custom-dropdown.active .dropdown-option:nth-child(2) { animation-delay: 0.08s; }
+.custom-dropdown.active .dropdown-option:nth-child(3) { animation-delay: 0.13s; }
+
+/* ---- bouncy hover (the EventCard easing) ---- */
+.submit-btn,
+.rulebook-btn,
+#addMember,
+.agreement {
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rulebook-card {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.rulebook-card:hover {
+    transform: scale(1.015);
+    box-shadow: 0 14px 34px rgba(170, 18, 16, 0.25);
+}
+
+/* ---- shimmer sweep on the main button ---- */
+.submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.submit-btn:hover::after {
+    left: 130%;
+}
+
+/* ---- respect reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

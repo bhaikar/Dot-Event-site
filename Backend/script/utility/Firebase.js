@@ -47,35 +47,35 @@ async function addTicket(utrNo) {
   );
     teamData.receiptID=docInfo.id
   sessionStorage.setItem("teamData", JSON.stringify(teamData));
-  await setDoc(docInfo, teamData);
+  // await setDoc(docInfo, teamData);
 
   //Supabase:
 
 const { data, error } = await supabaseClient
     .from("ETicket2")
-    .insert({
-      uuid: teamData.uuid,
-      team_name: teamData.teamName,
-      leader_name: teamData.leaderName,
-      mobile: teamData.mobile,
-      whatsapp: teamData.whatsapp,
-      members: teamData.members,
-      date: teamData.date,
-      payment_status: teamData.paymentStatus,
-      receipt_id: teamData.receiptID,
-      ticket: teamData.ticket,
-      ticket_id: teamData.ticketId,
-      ticket_price: teamData.ticketPrice,
-      time_application: teamData.timeApplication,
-      email_id: teamData.emailId,
-      time_utr: teamData.timeUtr,
-      utr: teamData.utr
-    });
-    if (error) {
-        console.error("Failed to save:", error);
-        return;
-    }
-    console.log("Successfully saved:", data);
+    // .insert({
+    //   uuid: teamData.uuid,
+    //   team_name: teamData.teamName,
+    //   leader_name: teamData.leaderName,
+    //   mobile: teamData.mobile,
+    //   whatsapp: teamData.whatsapp,
+    //   members: teamData.members,
+    //   date: teamData.date,
+    //   payment_status: teamData.paymentStatus,
+    //   receipt_id: teamData.receiptID,
+    //   ticket: teamData.ticket,
+    //   ticket_id: teamData.ticketId,
+    //   ticket_price: teamData.ticketPrice,
+    //   time_application: teamData.timeApplication,
+    //   email_id: teamData.emailId,
+    //   time_utr: teamData.timeUtr,
+    //   utr: teamData.utr
+    // });
+    // if (error) {
+    //     console.error("Failed to save:", error);
+    //     return;
+    // }
+    // console.log("Successfully saved:", data);
 
 
 
