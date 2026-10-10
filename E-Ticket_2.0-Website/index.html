@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Team Registration</title>
+    <link rel="stylesheet" href="style/Index.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">Team Registration</div>
+    <div class="nav-text">Register your team</div>
+</nav>
+
+<section class="hero">
+    <h1>Register Your Team</h1>
+    <p>Fill in the details below to complete your team registration.</p>
+</section>
+
+<div class="form-container">
+
+    <form class="form-body" id="teamForm">
+
+        <div class="section-title">Team Details</div>
+
+        <div class="field">
+            <label for="teamName">Team Name</label>
+            <input
+                type="text"
+                id="teamName"
+                placeholder="Enter team name"
+                required
+            >
+        </div>
+
+        <div class="field">
+            <label for="leaderName">Team Leader</label>
+            <input
+                type="text"
+                id="leaderName"
+                placeholder="Enter leader name"
+                required
+            >
+        </div>
+
+        <div class="field">
+            <label for="mobile">Mobile Number</label>
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="Enter 10-digit mobile number"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                required
+            >
+        </div>
+
+        <div class="field">
+            <label for="whatsapp">WhatsApp Number</label>
+            <input
+                type="tel"
+                id="whatsapp"
+                placeholder="Enter 10-digit WhatsApp number"
+                pattern="[0-9]{10}"
+                maxlength="10"
+                required
+            >
+        </div>
+
+        <div class="field">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email address"
+                pattern="[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
+                title="Enter a valid email address, for example name@example.com"
+                autocomplete="email"
+                inputmode="email"
+                maxlength="100"
+                required
+            >
+            <div class="field-hint email-hint">
+                Your ticket and receipt will be sent to this email.
+            </div>
+        </div>
+
+        <div class="members-header">
+            <h2>Team Members</h2>
+
+            <button type="button" id="addMember">
+                + Add Member
+            </button>
+        </div>
+
+        <div id="members">
+
+            <div class="member">
+                <label>Member 2 Name</label>
+
+                <input
+                    type="text"
+                    name="member"
+                    placeholder="Enter member 2 name"
+                    required
+                >
+            </div>
+
+        </div>
+
+        <div class="ticket-section">
+
+            <div class="field">
+                <label for="ticket" >Select Ticket</label>
+                <select id="ticket" required>
+                    <option value="">Choose a ticket</option>
+                    <option value="Hackathon">Hackathon</option>
+                    <option value="Gameathon">Gameathon</option>
+                    <option value="Cicada">Cicada</option>
+                </select>
+            </div>
+
+            <!-- =====================================================
+                   DROP DOWN
+              ====================================================== -->
+
+<!--            <div class="event-box field">-->
+            <div class="field">
+
+                <div class="custom-dropdown" id="eventDropdown">
+
+                    <!-- Selected option -->
+
+                    <div class="dropdown-selected">
+
+                        <div class="selected-content">
+
+                            <div class="selected-text">
+
+                                <div class="selected-title" id="selectedTitle">
+                                    Select an event
+                                </div>
+
+                                <div class="selected-price" id="selectedPrice">
+                                    Choose your event
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="arrow">
+                            ⌄
+                        </div>
+
+                    </div>
+
+
+                    <!-- Dropdown options -->
+
+                    <div class="dropdown-options">
+
+                        <div
+                            class="dropdown-option"
+                            data-value="Gameathon"
+                            data-price="₹200"
+                        >
+
+                            <div class="option-info">
+
+                                <div class="option-name">
+                                    Gameathon
+                                </div>
+
+                                <div class="option-description">
+                                    Gaming & competition
+                                </div>
+
+                            </div>
+
+                            <div class="option-price">
+                                ₹200
+                            </div>
+
+
+                        </div>
+
+
+                        <div
+                            class="dropdown-option"
+                            data-value="Hackathon"
+                            data-price="₹200"
+                        >
+
+                            <div class="option-info">
+
+                                <div class="option-name">
+                                    Hackathon
+                                </div>
+
+                                <div class="option-description">
+                                    Build & innovate
+                                </div>
+
+                            </div>
+
+                            <div class="option-price">
+                                ₹200
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="dropdown-option"
+                            data-value="Cicada"
+                            data-price="₹200"
+                        >
+
+                            <div class="option-info">
+
+                                <div class="option-name">
+                                    Cicada
+                                </div>
+
+                                <div class="option-description">
+                                    Coding & technology
+                                </div>
+
+                            </div>
+
+                            <div class="option-price">
+                                ₹200
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+             <!-- =====================================================
+                 RULEBOOK
+            ====================================================== -->
+
+
+
+                <div class="rulebook-card">
+
+                    <div class="rulebook-text">
+                        <strong>Event Rulebook</strong>
+                        <span>
+                        Please read the rulebook carefully before registering.
+                    </span>
+                    </div>
+
+                    <!-- Put your PDF at assets/Rulebook.pdf (or change the path) -->
+                    <a
+                            class="rulebook-btn"
+                            href="assets/Rulebook.pdf"
+                            download="Rulebook.pdf"
+                    >
+                        &#8595; Download Rulebook
+                    </a>
+
+                </div>
+
+
+            <div class="agreement">
+                <label>
+                    <input
+                        type="checkbox"
+                        id="rulebookAgree"
+                        name="rulebookAgree"
+                        required
+                    >
+
+                    <span>
+                        I have read the rulebook and agree to follow
+                        all the rules and guidelines of the event.
+                    </span>
+                </label>
+            </div>
+
+
+            <div class="agreement">
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            name="terms"
+                            required
+                        >
+
+                        <span>
+                            I have read and agree to the
+                            <strong>Terms & Conditions</strong>.
+                        </span>
+                    </label>
+
+            </div>
+                <button type="submit" class="submit-btn">
+                Complete Registration
+            </button>
+
+
+
+            <div class="message" id="message">
+                Team registration submitted successfully!
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+<!--<div class="footer">-->
+<!--    © 2026 Team Registration. All rights reserved.-->
+<!--</div>-->
+
+<!-- FOOTER -->
+
+  <div class="footer">
+    <div>
+      <div>Thank you for being part of DevOps Club.</div>
+      <div style="color:#888888;margin-top:6px;">
+        &copy; 2026 DevOps Club, MCE, Hassan, India.
+          <br>
+          All rights reserved.
+      </div>
+    </div>
+  </div>
+
+
+<script type="module" src="script/Index.js"></script>
+
+</body>
+</html>
+

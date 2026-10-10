@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UPI Payment</title>
+
+  <link rel="stylesheet" href="style/Payment_gate.css">
+</head>
+
+<body>
+
+  <div class="payment-box">
+
+    <h2>Make Payment</h2>
+
+    <div class="instruction">
+      Scan the QR code below using any UPI app.
+    </div>
+
+
+    <!-- =========================
+         RECEIVER INFORMATION
+         ========================= -->
+
+    <div class="receiver">
+
+      <div class="receiver-label">
+        Amount will be received by
+      </div>
+
+      <div class="receiver-name">
+        DOT
+      </div>
+
+      <div class="upi-id">
+        UPI ID: dot@upi
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         PAYMENT AMOUNT
+         ========================= -->
+
+    <div class="amount" id="ticketAmt">
+      ₹1,000
+    </div>
+
+
+    <!-- =========================
+         QR CODE AREA
+         ========================= -->
+
+    <div class="qr-section">
+
+      <div class="qr-title">
+        Scan & Pay
+      </div>
+
+      <div class="qr-box">
+
+                <!--
+          PUT YOUR QR CODE HERE
+
+          Replace "upi-qr.png"
+          with your QR image filename.
+
+          Example:
+          images/my-qr.png
+        -->
+
+        <div id="qrcode"></div>
+
+
+<!--        <img id="qrcode"-->
+<!--          src="upi-qr.png"-->
+<!--          alt="UPI Payment QR Code"-->
+<!--        >-->
+
+      </div>
+
+      <div class="qr-help">
+        Open Google Pay, PhonePe, Paytm or another UPI app
+        and scan this QR code.
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         UTR / REF ID
+         ========================= -->
+
+    <form id="paymentForm">
+
+      <div class="field">
+
+        <label for="utr">
+          UTR / Ref ID (12 Digit)
+        </label>
+
+        <input
+          type="text"
+          id="utr"
+          name="utr"
+          placeholder="Enter 12 digit UTR / Ref ID"
+          maxlength="12"
+          inputmode="numeric"
+          autocomplete="off"
+          required
+        >
+
+        <div class="help">
+          Enter exactly 12 digits.
+        </div>
+
+      </div>
+
+
+      <!-- Disabled until exactly 12 digits -->
+      <button
+        type="submit"
+        id="submitBtn"
+        disabled
+      >
+        Submit Payment
+      </button>
+
+      <button
+        type="button"
+        id="downloadBtn"
+        disabled
+      >
+        Download Receipt
+      </button>
+
+      <div
+        id="message"
+        class="message"
+      ></div>
+
+    </form>
+
+
+<!-- FOOTER -->
+    <div class="footer">
+      <div>
+        <div>Thank you for being part of DevOps Club.</div>
+        <div style="color:#888888;margin-top:6px;">
+          &copy; 2026 DevOps Club, MCE, Hassan, India.
+          <br>
+          All rights reserved.
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="script/min/qrcode.min.js"></script>
+  <script src="script/min/html2canvas.min.js"></script>
+  <script src="script/min/jspdf.umd.min.js"></script>
+  <script type="module" src="script/Payment_gate.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!--<script src="https://unpkg.com/@supabase/supabase-js@2"></script>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>-->
+
+
+
+
+</body>
+</html>
+

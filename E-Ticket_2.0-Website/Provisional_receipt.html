@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Payment Receipt</title>
+
+  <link rel="stylesheet" href="./style/Provisional_receipt.css">
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       RECEIPT
+  ====================================================== -->
+
+  <div
+    class="receipt"
+    id="receipt">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="header">
+
+
+      <div class="header-left">
+
+        <h1>
+
+          <span
+            id="statusIcon"
+            class="status-icon">
+          </span>
+
+          <span id="documentTitle">
+            PAYMENT RECEIPT
+          </span>
+
+        </h1>
+
+
+        <p>
+
+          <strong>
+            Receipt ID:
+          </strong>
+
+          <span id="receiptNumber"></span>
+
+        </p>
+
+
+        <p>
+
+          <strong>
+            Date:
+          </strong>
+
+          <span id="receiptDate"></span>
+
+        </p>
+
+      </div>
+
+
+      <div class="header-right">
+
+<!--        <img src="../Prototype/assets/dot-logo-b.png"-->
+<!--          alt="My Company Logo"-->
+<!--          class="company-logo">-->
+
+
+        <h3>
+          DevOps Club
+        </h3>
+
+        <p>
+          MCE , Hassan , India
+        </p>
+
+        <p>
+
+        </p>
+
+      </div>
+
+    </div>
+    <div>
+      <p>
+        Hi <strong id="leaderName"></strong>,<br>
+        Thank you for registering for DevOps <span id="eventName"></span>! We have received your payment details, and your ticket will be confirmed once the payment is verified.
+      </p>
+    </div>
+
+    <hr>
+
+
+    <!-- =================================================
+         CUSTOMER
+    ================================================== -->
+
+    <div class="customer-details">
+
+      <h3>
+        <span id="teamName">Customer Details</span>
+      </h3>
+
+      <p>
+
+        <strong>
+          <span id="leaderName">Customer Name</span>
+        </strong>
+
+        <br>
+        <span id="member1">Member 1</span>
+        <br>
+        <span id="member2">Member 2</span>
+        <br>
+        <span id="member3">Member 3</span>
+
+
+      </p>
+
+    </div>
+
+
+    <!-- =================================================
+         TICKET
+    ================================================== -->
+
+    <div class="ticket-details">
+
+      <h3>
+        Ticket Details
+      </h3>
+
+
+      <div class="ticket-row">
+
+        <span>
+          Event
+        </span>
+
+        <strong id="ticketType"></strong>
+
+      </div>
+
+
+      <div class="ticket-row">
+
+        <span>
+          Ticket ID
+        </span>
+
+        <strong id="ticketId"></strong>
+
+      </div>
+
+
+      <div class="ticket-row">
+
+        <span>
+          Ticket Price
+        </span>
+
+        <strong>
+
+          &#8377;
+
+          <span id="ticketPrice"></span>
+
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         TOTAL
+    ================================================== -->
+
+    <div class="total">
+
+      <p>
+
+        <strong>
+          Ticket Price:
+        </strong>
+
+        &#8377;
+
+        <span id="subtotal"></span>
+
+      </p>
+
+
+<!--      <p>-->
+
+<!--        <strong>-->
+<!--          GST (18%):-->
+<!--        </strong>-->
+
+<!--        &#8377;-->
+
+<!--        <span id="tax"></span>-->
+
+<!--      </p>-->
+
+
+      <h2>
+
+        Amount:
+
+        &#8377;
+
+        <span id="total"></span>
+
+      </h2>
+
+    </div>
+
+
+    <hr>
+
+
+    <!-- =================================================
+         PAYMENT DETAILS
+    ================================================== -->
+
+    <div class="payment-details">
+
+
+      <p>
+
+        <strong>
+          Payment Status:
+        </strong>
+
+        <span
+          id="paymentStatus"
+          class="status-badge">
+        </span>
+
+      </p>
+
+      <p>
+
+        <strong>
+          Payment Method:
+        </strong>
+
+        <span id="paymentMethod">
+          UPI
+        </span>
+
+      </p>
+
+
+      <p id="transactionRow">
+
+        <strong>
+          Transaction ID:
+        </strong>
+
+        <span id="transactionId"></span>
+
+      </p>
+
+    </div>
+
+
+    <!-- =================================================
+         STATUS MESSAGE
+    ================================================== -->
+
+    <div
+      id="confirmationBox"
+      class="payment-confirmation">
+
+
+      <strong id="confirmationTitle">
+      </strong>
+
+
+      <p id="confirmationMessage">
+      </p>
+
+    </div>
+
+<div id="receipt2">
+    <!-- =================================================
+         QR CODE
+    ================================================== -->
+    <div class="qr-section">
+
+      <h3>
+        Receipt / Ticket Verification
+      </h3>
+
+
+      <p id="qrDescription">
+        Scan the QR code to verify the receipt details.
+      </p>
+
+
+
+      <div id="qrCode"></div>
+<!--      <img-->
+<!--        id="qrCode"-->
+<!--        src=""-->
+<!--        alt="QR Code">-->
+
+
+
+      <div class="qr-reference">
+
+        Receipt:
+
+        <strong id="qrReceiptNumber">
+        </strong>
+
+      </div>
+
+    </div>
+
+    <!-- =================================================
+         ABOUT
+    ================================================== -->
+
+    <div class="about-receipt">
+
+      <h3>
+        About This Document
+      </h3>
+
+
+      <p id="aboutMessage">
+
+        This document contains the payment and ticket
+        information associated with this transaction.
+
+      </p>
+
+            <p>
+        This is a provisional receipt issued for registration
+        and reference purposes. It is not a payment receipt
+        and should not be considered confirmation that payment
+        has been received.
+      </p>
+
+      <p>
+        Payment will be considered successful only after the
+        payment has been verified and confirmed by the
+        organizer.
+      </p>
+
+      <p>
+        Please retain this receipt for your records. A payment
+        confirmation or official receipt may be issued
+        separately after successful verification.
+      </p>
+
+    </div>
+
+    <!-- =========================
+         PROVISIONAL NOTICE
+    ========================== -->
+
+    <div class="provisional-notice">
+
+      <strong>
+        Provisional Receipt
+      </strong>
+
+      <p>
+        This document is issued for reference and registration
+        purposes only. It does not constitute proof of payment
+        or payment confirmation.
+      </p>
+
+    </div>
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <div class="footer-note">
+
+      <span id="footerMessage">
+
+        Please retain this document for your records.
+
+      </span>
+
+    </div>
+
+  </div>
+    <!-- =================================================
+         PRINT
+    ================================================== -->
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div>
+        <div>Thank you for being part of DevOps Club.</div>
+        <div>Please retain this document for your records.</div>
+        <div style="color:#888888;margin-top:6px;">
+          &copy; 2026 DevOps Club, MCE, Hassan, India.
+          <br>
+          All rights reserved.
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="print-btn"
+      onclick="window.print()">
+
+      Print / Save PDF
+
+    </button>
+  </div>
+<!--  <script type="module" src="./script/Generate_dateTime.js"></script>-->
+  <script type="module" src="./script/Provisional_receipt.js"></script>
+  <script src="script/min/qrcode.min.js"></script>
+<!--  <script type="module" src="script/Payment_gate.js"></script>-->
+
+
+</body>
+
+</html>
+
