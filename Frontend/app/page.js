@@ -3,6 +3,7 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import EventCard from "@/components/EventCard";
 import SponsorStrip from "@/components/SponsorStrip";
+import { hackathonCfg, gamethonCfg, EVENT_DATES_SHORT } from "@/data/events";
 import mascot from "@/public/images/mascot.webp";
 
 export default function HomePage() {
@@ -83,9 +84,9 @@ export default function HomePage() {
                 </span>
               </div>
               <div className="flex flex-col gap-0.5">
-                <b className="font-head text-2xl">100+</b>
+                <b className="font-head text-2xl uppercase">{EVENT_DATES_SHORT}</b>
                 <span className="text-[11px] tracking-[0.14em] uppercase text-brand-rose">
-                  Builders Expected
+                  Event Dates
                 </span>
               </div>
               <div className="flex flex-col gap-0.5">
@@ -138,35 +139,9 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5.5">
-            <EventCard
-              href="/events/hackathon"
-              glyph="01"
-              iconLabel="Build Event"
-              name="Hackathon"
-              desc="Build. Collaborate. Innovate. A high-intensity build sprint for developers who ship."
-              tags={["Build", "Code", "Collaborate"]}
-              accent="rgba(170,18,16,0.35)"
-              image="/images/events/image.png"
-              day="5–6"
-              month="Nov"
-              time="11:00 AM → 11:00 AM"
-              dateNote="24 hours"
-            />
+            <EventCard event={hackathonCfg} />
 
-            <EventCard
-              href="/events/gameathon"
-              glyph="02"
-              iconLabel="Play Event"
-              name="Gameathon"
-              desc="Your gameathon description here."
-              tags={["Play", "Compete", "Win"]}
-              accent="rgba(170,18,16,0.35)"
-              image="/images/events/image.png"
-              day="7"
-              month="Nov"
-              time="Starts 10:30 AM"
-              dateNote="One day"
-            />
+            <EventCard event={gamethonCfg} />
           </div>
         </div>
       </section>

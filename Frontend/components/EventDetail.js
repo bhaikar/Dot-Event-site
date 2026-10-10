@@ -37,9 +37,12 @@ export default function EventDetail({ cfg }) {
               </Reveal>
             </div>
             <Reveal delay={100} className="panel panel-corners p-6.5 flex flex-col gap-4.5">
+              <InfoRow label="Dates" value={cfg.dates} />
+              <InfoRow label="Kickoff" value={cfg.kickoff} />
               <InfoRow label="Format" value={cfg.format} />
               <InfoRow label="Team Size" value={cfg.teamSize} />
-              <InfoRow label="Mode" value={cfg.mode} last />
+              <InfoRow label="Mode" value={cfg.mode} />
+              <InfoRow label="Prize Pool" value={cfg.prizePool} last />
               <div className="flex justify-between items-center text-[13.5px]">
                 <span className="font-head text-[11px] tracking-[0.1em] uppercase text-brand-rose">
                   Status
