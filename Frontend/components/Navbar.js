@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -38,17 +39,16 @@ export default function Navbar() {
           }}
         >
           <Link href="/" className="flex items-center gap-3">
-            <div
-              className="w-[38px] h-[38px] rounded-[9px] flex items-center justify-center font-head font-bold text-[13px] text-white relative overflow-hidden"
-              style={{
-                background: "linear-gradient(150deg,var(--color-red-bright),var(--color-burgundy))",
-                boxShadow: "0 0 0 1px rgba(255,255,255,0.14) inset, 0 6px 16px -6px var(--color-glow)",
-              }}
-            >
-              DOT
-            </div>
+            <Image
+              src="/images/DotLogo.png"
+              alt="DOT DevOps Team logo"
+              width={38}
+              height={38}
+              priority
+              className="h-[38px] w-[38px] object-contain"
+            />
             <div className="flex flex-col leading-tight">
-              <b className="font-head font-bold text-[14.5px] tracking-wide">DOT DEVOPS TEAM</b>
+              <b className="font-head font-bold text-[14.5px] tracking-wide">DEVOPS TEAM</b>
               <span className="font-head text-[9.5px] tracking-[0.2em] text-brand-rose uppercase">
                 Hack.MCE 6.0
               </span>
@@ -62,9 +62,8 @@ export default function Navbar() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className={`relative px-4 py-2.5 font-head text-[12.5px] tracking-[0.14em] uppercase rounded-lg transition-colors ${
-                    active ? "text-brand-lav" : "text-brand-text-dim hover:text-brand-lav hover:bg-white/5"
-                  }`}
+                  className={`relative px-4 py-2.5 font-head text-[12.5px] tracking-[0.14em] uppercase rounded-lg transition-colors ${active ? "text-brand-lav" : "text-brand-text-dim hover:text-brand-lav hover:bg-white/5"
+                    }`}
                 >
                   {l.label}
                   {active && (
@@ -112,9 +111,8 @@ export default function Navbar() {
       </header>
 
       <div
-        className={`fixed inset-0 z-[99] flex flex-col items-center justify-center gap-1.5 transition-opacity ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-[99] flex flex-col items-center justify-center gap-1.5 transition-opacity ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
         style={{ background: "rgba(20,14,17,0.98)", backdropFilter: "blur(20px)" }}
       >
         {NAV_LINKS.map((l) => {
@@ -124,9 +122,8 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className={`font-head text-[26px] tracking-wide uppercase py-3.5 ${
-                active ? "text-brand-lav" : "text-brand-text-dim"
-              }`}
+              className={`font-head text-[26px] tracking-wide uppercase py-3.5 ${active ? "text-brand-lav" : "text-brand-text-dim"
+                }`}
             >
               {l.label}
             </Link>
