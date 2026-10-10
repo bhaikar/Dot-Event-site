@@ -1,0 +1,2835 @@
+/*!*!* =====================================================*!*/
+/*!*   PROVISIONAL RECEIPT  -  DOT DevOps Team theme*!*/
+
+/*!*   Dark Hack.MCE look: wine-black page, dot grid, crimson*!*/
+/*!*   glow, and the receipt itself as a dark glass card with*!*/
+/*!*   crimson corner brackets.*!*/
+
+/*!*   STATUS COLOURS*!*/
+/*!*   Provisional_receipt.js sets, per payment status:*!*/
+/*!*     --status-color   dark, saturated  (e.g. #1e40af)*!*/
+/*!*     --status-light   pale tint        (e.g. #dbeafe)*!*/
+/*!*     --status-border  soft pastel      (e.g. #93c5fd)*!*/
+/*!*   On a dark card the pale / pastel values are used for text*!*/
+/*!*   and borders, and the saturated one for fills.*!*/
+
+/*!*   FONTS: set --font-head to the font used on the site.*!*/
+/*!*===================================================== *!*!*/
+
+/*!*:root {*!*/
+/*!*    --bg-0: #100a0e;*!*/
+
+/*!*    --red: #aa1210;*!*/
+/*!*    --red-hot: #c41c1a;*!*/
+/*!*    --red-bright: #ff4a3d;*!*/
+/*!*    --burgundy: #6c1b1c;*!*/
+/*!*    --rose: #a77a83;*!*/
+/*!*    --lav: #e1d6e9;*!*/
+
+/*!*    --glow: rgba(196, 28, 26, 0.45);*!*/
+
+/*!*    --card-top: #2b2026;*!*/
+/*!*    --card-bottom: #211920;*!*/
+/*!*    --text: #f3ecf2;*!*/
+/*!*    --text-dim: rgba(225, 218, 240, 0.68);*!*/
+/*!*    --line: rgba(225, 214, 233, 0.14);*!*/
+/*!*    --line-red: rgba(170, 18, 16, 0.45);*!*/
+
+/*!*    --font-head: "Orbitron", "Rajdhani", "Segoe UI", Arial, sans-serif;*!*/
+/*!*    --font-body: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;*!*/
+/*!*}*!*/
+
+/*!*!* =====================================================*!*/
+/*!*   GLOBAL*!*/
+/*!*===================================================== *!*!*/
+
+/*!** {*!*/
+/*!*    box-sizing: border-box;*!*/
+/*!*}*!*/
+
+/*!*html {*!*/
+/*!*    background: var(--bg-0);*!*/
+/*!*}*!*/
+
+/*!*body {*!*/
+/*!*    margin: 0;*!*/
+/*!*    padding: 30px;*!*/
+
+/*!*    font-family: var(--font-body);*!*/
+/*!*    color: var(--text);*!*/
+
+/*!*    background: transparent;*!*/
+/*!*    -webkit-font-smoothing: antialiased;*!*/
+/*!*}*!*/
+
+/*!*!* ---- backdrop: wine-black base + crimson bloom ---- *!*!*/
+/*!*body::before {*!*/
+/*!*    content: "";*!*/
+/*!*    position: fixed;*!*/
+/*!*    inset: 0;*!*/
+/*!*    z-index: -2;*!*/
+/*!*    pointer-events: none;*!*/
+/*!*    background:*!*/
+/*!*        radial-gradient(120% 100% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(8, 4, 6, 0.65) 100%),*!*/
+/*!*        radial-gradient(55% 70% at 77% 40%, rgba(170, 18, 16, 0.30) 0%, rgba(108, 27, 28, 0.12) 42%, rgba(108, 27, 28, 0) 72%),*!*/
+/*!*        radial-gradient(50% 55% at 6% 0%, rgba(108, 27, 28, 0.30) 0%, rgba(108, 27, 28, 0) 70%),*!*/
+/*!*        linear-gradient(180deg, #1d1419 0%, #150e12 55%, #100a0e 100%);*!*/
+/*!*}*!*/
+
+/*!*!* ---- blueprint dot grid ---- *!*!*/
+/*!*body::after {*!*/
+/*!*    content: "";*!*/
+/*!*    position: fixed;*!*/
+/*!*    inset: 0;*!*/
+/*!*    z-index: -1;*!*/
+/*!*    pointer-events: none;*!*/
+/*!*    background-image: radial-gradient(circle, rgba(225, 214, 233, 0.16) 1px, rgba(225, 214, 233, 0) 1.5px);*!*/
+/*!*    background-size: 32px 32px;*!*/
+/*!*    background-position: -16px -16px;*!*/
+/*!*    -webkit-mask-image: linear-gradient(to right, transparent 12%, #000 72%);*!*/
+/*!*    mask-image: linear-gradient(to right, transparent 12%, #000 72%);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   RECEIPT (dark card)*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.receipt {*!*/
+/*!*    !* fallbacks - Provisional_receipt.js overrides these inline *!*!*/
+/*!*    --status-color: #1e40af;*!*/
+/*!*    --status-light: #dbeafe;*!*/
+/*!*    --status-border: #93c5fd;*!*/
+
+/*!*    position: relative;*!*/
+
+/*!*    width: 100%;*!*/
+/*!*    max-width: 800px;*!*/
+/*!*    margin: 0 auto 30px;*!*/
+/*!*    padding: 40px;*!*/
+
+/*!*    background: linear-gradient(180deg, var(--card-top), var(--card-bottom));*!*/
+/*!*    color: var(--text);*!*/
+
+/*!*    border: 1px solid var(--line);*!*/
+/*!*    border-top: 6px solid var(--status-border);*!*/
+/*!*    border-radius: 16px;*!*/
+
+/*!*    box-shadow:*!*/
+/*!*        0 28px 70px rgba(0, 0, 0, 0.55),*!*/
+/*!*        0 0 60px -20px var(--glow);*!*/
+/*!*}*!*/
+
+/*!*!* crimson corner brackets, like the site panels *!*!*/
+/*!*.receipt::before,*!*/
+/*!*.receipt::after {*!*/
+/*!*    content: "";*!*/
+/*!*    position: absolute;*!*/
+/*!*    width: 20px;*!*/
+/*!*    height: 20px;*!*/
+/*!*    pointer-events: none;*!*/
+/*!*}*!*/
+
+/*!*.receipt::before {*!*/
+/*!*    top: 16px;*!*/
+/*!*    left: 16px;*!*/
+/*!*    border-top: 2px solid var(--red-bright);*!*/
+/*!*    border-left: 2px solid var(--red-bright);*!*/
+/*!*    border-top-left-radius: 6px;*!*/
+/*!*}*!*/
+
+/*!*.receipt::after {*!*/
+/*!*    right: 16px;*!*/
+/*!*    bottom: 16px;*!*/
+/*!*    border-right: 2px solid var(--red-bright);*!*/
+/*!*    border-bottom: 2px solid var(--red-bright);*!*/
+/*!*    border-bottom-right-radius: 6px;*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   HEADER*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.header {*!*/
+/*!*    display: flex;*!*/
+/*!*    justify-content: space-between;*!*/
+/*!*    align-items: flex-start;*!*/
+/*!*    gap: 30px;*!*/
+/*!*    margin-bottom: 30px;*!*/
+/*!*}*!*/
+
+/*!*.header-left {*!*/
+/*!*    flex: 1;*!*/
+/*!*}*!*/
+
+/*!*!* =====================================================*!*/
+/*!*   COMPANY LOGO*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.company-logo {*!*/
+/*!*    display: block;*!*/
+
+/*!*    width: 120px;*!*/
+/*!*    max-width: 100%;*!*/
+/*!*    height: auto;*!*/
+/*!*    max-height: 70px;*!*/
+
+/*!*    object-fit: contain;*!*/
+
+/*!*    margin: 0 0 12px auto;*!*/
+/*!*}*!*/
+
+/*!*.header-right {*!*/
+/*!*    text-align: right;*!*/
+/*!*}*!*/
+
+/*!*.header h1 {*!*/
+/*!*    margin: 0 0 12px;*!*/
+
+/*!*    color: var(--status-border);*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 26px;*!*/
+/*!*    font-weight: 800;*!*/
+/*!*    letter-spacing: 0.06em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*}*!*/
+
+/*!*.header h3 {*!*/
+/*!*    margin: 0 0 10px;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 16px;*!*/
+/*!*    font-weight: 700;*!*/
+/*!*    letter-spacing: 0.1em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*    color: #fff;*!*/
+/*!*}*!*/
+
+/*!*.header p {*!*/
+/*!*    margin: 6px 0;*!*/
+
+/*!*    font-size: 14px;*!*/
+/*!*    color: var(--text-dim);*!*/
+/*!*}*!*/
+
+/*!*.header p strong {*!*/
+/*!*    color: var(--lav);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   STATUS ICON*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.status-icon {*!*/
+/*!*    display: inline-flex;*!*/
+
+/*!*    width: 40px;*!*/
+/*!*    height: 40px;*!*/
+
+/*!*    margin-right: 10px;*!*/
+
+/*!*    align-items: center;*!*/
+/*!*    justify-content: center;*!*/
+
+/*!*    border-radius: 50%;*!*/
+
+/*!*    background: var(--status-color);*!*/
+/*!*    border: 2px solid var(--status-border);*!*/
+/*!*    color: var(--status-light);*!*/
+
+/*!*    font-family: var(--font-body);*!*/
+/*!*    font-size: 20px;*!*/
+/*!*    font-weight: bold;*!*/
+
+/*!*    vertical-align: middle;*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   DIVIDER*!*/
+/*!*===================================================== *!*!*/
+
+/*!*hr {*!*/
+/*!*    border: none;*!*/
+/*!*    border-top: 1px dashed var(--line);*!*/
+/*!*    margin: 25px 0;*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   CUSTOMER*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.customer-details {*!*/
+/*!*    margin-bottom: 25px;*!*/
+/*!*}*!*/
+
+/*!*.customer-details h3 {*!*/
+/*!*    margin: 0 0 10px;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 15px;*!*/
+/*!*    font-weight: 700;*!*/
+/*!*    letter-spacing: 0.1em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*    color: #fff;*!*/
+/*!*}*!*/
+
+/*!*.customer-details p {*!*/
+/*!*    line-height: 1.7;*!*/
+/*!*    margin: 0;*!*/
+
+/*!*    font-size: 14px;*!*/
+/*!*    color: var(--text-dim);*!*/
+/*!*}*!*/
+
+/*!*.customer-details p strong {*!*/
+/*!*    color: var(--lav);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   TICKET*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.ticket-details {*!*/
+/*!*    margin-top: 30px;*!*/
+
+/*!*    background: rgba(16, 10, 14, 0.35);*!*/
+/*!*    border: 1px solid var(--line);*!*/
+/*!*    border-radius: 12px;*!*/
+
+/*!*    overflow: hidden;*!*/
+/*!*}*!*/
+
+/*!*!* wine ticket header *!*!*/
+/*!*.ticket-details h3 {*!*/
+/*!*    margin: 0;*!*/
+
+/*!*    padding: 15px 18px;*!*/
+
+/*!*    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 12.5px;*!*/
+/*!*    font-weight: 700;*!*/
+/*!*    letter-spacing: 0.16em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*    color: #fff;*!*/
+/*!*}*!*/
+
+/*!*.ticket-row {*!*/
+/*!*    display: flex;*!*/
+
+/*!*    justify-content: space-between;*!*/
+/*!*    align-items: center;*!*/
+
+/*!*    gap: 20px;*!*/
+
+/*!*    padding: 15px 18px;*!*/
+
+/*!*    border-top: 1px dotted var(--line);*!*/
+/*!*}*!*/
+
+/*!*.ticket-details h3 + .ticket-row {*!*/
+/*!*    border-top: none;*!*/
+/*!*}*!*/
+
+/*!*.ticket-row span {*!*/
+/*!*    font-size: 14px;*!*/
+/*!*    color: var(--text-dim);*!*/
+/*!*}*!*/
+
+/*!*.ticket-row strong {*!*/
+/*!*    font-size: 14.5px;*!*/
+/*!*    color: #fff;*!*/
+/*!*    text-align: right;*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   TOTAL*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.total {*!*/
+/*!*    margin-top: 25px;*!*/
+/*!*    text-align: right;*!*/
+/*!*}*!*/
+
+/*!*.total p {*!*/
+/*!*    margin: 8px 0;*!*/
+
+/*!*    font-size: 14px;*!*/
+/*!*    color: var(--text-dim);*!*/
+/*!*}*!*/
+
+/*!*.total p strong {*!*/
+/*!*    color: var(--lav);*!*/
+/*!*}*!*/
+
+/*!*.total h2 {*!*/
+/*!*    margin: 15px 0 0;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 22px;*!*/
+/*!*    font-weight: 800;*!*/
+/*!*    letter-spacing: 0.04em;*!*/
+
+/*!*    color: var(--status-border);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   PROVISIONAL NOTICE*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.provisional-notice {*!*/
+/*!*    margin-top: 25px;*!*/
+/*!*    padding: 15px;*!*/
+
+/*!*    border: 1px solid rgba(240, 173, 78, 0.5);*!*/
+/*!*    background: rgba(240, 173, 78, 0.10);*!*/
+/*!*    color: #f6c87a;*!*/
+
+/*!*    border-radius: 10px;*!*/
+/*!*    text-align: center;*!*/
+/*!*}*!*/
+
+/*!*.provisional-notice strong {*!*/
+/*!*    display: block;*!*/
+
+/*!*    margin-bottom: 7px;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 14px;*!*/
+/*!*    letter-spacing: 0.1em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*}*!*/
+
+/*!*.provisional-notice p {*!*/
+/*!*    margin: 0;*!*/
+
+/*!*    font-size: 13px;*!*/
+/*!*    line-height: 1.6;*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   PAYMENT DETAILS*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.payment-details {*!*/
+/*!*    margin-top: 20px;*!*/
+/*!*}*!*/
+
+/*!*.payment-details p {*!*/
+/*!*    margin: 12px 0;*!*/
+
+/*!*    font-size: 14px;*!*/
+/*!*    color: var(--text-dim);*!*/
+/*!*}*!*/
+
+/*!*.payment-details p strong {*!*/
+/*!*    color: var(--lav);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   STATUS BADGE*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.status-badge {*!*/
+/*!*    display: inline-flex;*!*/
+
+/*!*    align-items: center;*!*/
+
+/*!*    padding: 7px 13px;*!*/
+
+/*!*    border-radius: 20px;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 11px;*!*/
+/*!*    font-weight: 700;*!*/
+/*!*    letter-spacing: 0.08em;*!*/
+
+/*!*    color: var(--status-light);*!*/
+/*!*    background: var(--status-color);*!*/
+/*!*    border: 1px solid var(--status-border);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   CONFIRMATION BOX*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.payment-confirmation {*!*/
+/*!*    margin-top: 25px;*!*/
+
+/*!*    padding: 20px;*!*/
+
+/*!*    border-radius: 12px;*!*/
+
+/*!*    text-align: center;*!*/
+
+/*!*    color: var(--status-light);*!*/
+
+/*!*    background: linear-gradient(150deg, var(--status-color), #211920);*!*/
+
+/*!*    border: 1px solid var(--status-border);*!*/
+/*!*}*!*/
+
+/*!*.payment-confirmation strong {*!*/
+/*!*    display: block;*!*/
+
+/*!*    margin-bottom: 8px;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 15px;*!*/
+/*!*    letter-spacing: 0.08em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*    color: #fff;*!*/
+/*!*}*!*/
+
+/*!*.payment-confirmation p {*!*/
+/*!*    margin: 0;*!*/
+
+/*!*    font-size: 13px;*!*/
+
+/*!*    line-height: 1.6;*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   QR CODE*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.qr-section {*!*/
+/*!*    margin-top: 30px;*!*/
+
+/*!*    padding: 25px 20px;*!*/
+
+/*!*    border: 1px dashed var(--line-red);*!*/
+
+/*!*    background: rgba(16, 10, 14, 0.40);*!*/
+
+/*!*    border-radius: 12px;*!*/
+
+/*!*    text-align: center;*!*/
+/*!*}*!*/
+
+/*!*.qr-section h3 {*!*/
+/*!*    margin: 0 0 8px;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 14px;*!*/
+/*!*    letter-spacing: 0.1em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*    color: #fff;*!*/
+/*!*}*!*/
+
+/*!*.qr-section p {*!*/
+/*!*    font-size: 13px;*!*/
+
+/*!*    color: var(--text-dim);*!*/
+
+/*!*    margin: 0 0 18px;*!*/
+/*!*}*!*/
+
+/*!*!* stays white: a QR code needs a light background to be scannable *!*!*/
+/*!*#qrCode {*!*/
+/*!*    width: 210px;*!*/
+/*!*    height: 210px;*!*/
+
+/*!*    margin: auto;*!*/
+/*!*    padding: 10px;*!*/
+
+/*!*    display: flex;*!*/
+/*!*    align-items: center;*!*/
+/*!*    justify-content: center;*!*/
+
+/*!*    background: #ffffff;*!*/
+/*!*    border: 3px solid var(--red-bright);*!*/
+/*!*    border-radius: 14px;*!*/
+
+/*!*    box-shadow: 0 0 30px -6px var(--glow);*!*/
+/*!*}*!*/
+
+/*!*#qrCode canvas,*!*/
+/*!*#qrCode img {*!*/
+/*!*    max-width: 100%;*!*/
+/*!*    max-height: 100%;*!*/
+/*!*}*!*/
+
+/*!*.qr-reference {*!*/
+/*!*    margin-top: 14px;*!*/
+
+/*!*    font-size: 12px;*!*/
+/*!*    letter-spacing: 0.04em;*!*/
+
+/*!*    color: var(--text-dim);*!*/
+/*!*}*!*/
+
+/*!*.qr-reference strong {*!*/
+/*!*    color: var(--lav);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   ABOUT RECEIPT*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.about-receipt {*!*/
+/*!*    margin-top: 25px;*!*/
+
+/*!*    padding: 18px;*!*/
+
+/*!*    border: 1px solid var(--line);*!*/
+
+/*!*    background: rgba(225, 214, 233, 0.04);*!*/
+
+/*!*    border-radius: 12px;*!*/
+/*!*}*!*/
+
+/*!*.about-receipt h3 {*!*/
+/*!*    margin: 0 0 12px;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 13px;*!*/
+/*!*    letter-spacing: 0.12em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*    color: #fff;*!*/
+/*!*}*!*/
+
+/*!*.about-receipt p {*!*/
+/*!*    margin: 8px 0;*!*/
+
+/*!*    font-size: 13px;*!*/
+
+/*!*    line-height: 1.6;*!*/
+
+/*!*    color: var(--text-dim);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   FOOTER*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.footer-note {*!*/
+/*!*    margin-top: 30px;*!*/
+
+/*!*    padding-top: 15px;*!*/
+
+/*!*    border-top: 1px solid var(--line);*!*/
+
+/*!*    text-align: center;*!*/
+
+/*!*    font-size: 12px;*!*/
+
+/*!*    color: var(--text-dim);*!*/
+/*!*}*!*/
+
+/*!*!* brand line under the footer message *!*!*/
+/*!*.footer-note::after {*!*/
+/*!*    content: "DOT DevOps Team  \00B7  Build \2022  Learn \2022  Connect \2022  Create";*!*/
+
+/*!*    display: block;*!*/
+/*!*    margin-top: 8px;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 9.5px;*!*/
+/*!*    letter-spacing: 0.16em;*!*/
+/*!*    text-transform: uppercase;*!*/
+/*!*    color: var(--red-bright);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   PRINT BUTTON*!*/
+/*!*===================================================== *!*!*/
+
+/*!*.print-btn {*!*/
+/*!*    display: block;*!*/
+
+/*!*    margin: 28px auto 0;*!*/
+
+/*!*    padding: 13px 26px;*!*/
+
+/*!*    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));*!*/
+
+/*!*    color: white;*!*/
+
+/*!*    border: none;*!*/
+
+/*!*    border-radius: 10px;*!*/
+
+/*!*    box-shadow: 0 12px 28px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);*!*/
+
+/*!*    cursor: pointer;*!*/
+
+/*!*    font-family: var(--font-head);*!*/
+/*!*    font-size: 12px;*!*/
+/*!*    font-weight: 700;*!*/
+/*!*    letter-spacing: 0.14em;*!*/
+/*!*    text-transform: uppercase;*!*/
+
+/*!*    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);*!*/
+/*!*}*!*/
+
+/*!*.print-btn:hover {*!*/
+/*!*    transform: translateY(-2px);*!*/
+/*!*    box-shadow: 0 16px 34px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   ANIMATIONS  (same feel as the Hack.MCE site)*!*/
+/*!*   NOTE: Generate_pdf.js freezes these before it captures*!*/
+/*!*   the PDF, so the download is never caught mid-animation.*!*/
+/*!*===================================================== *!*!*/
+
+/*!*@keyframes reveal-up {*!*/
+/*!*    from { opacity: 0; transform: translateY(24px); }*!*/
+/*!*    to   { opacity: 1; transform: translateY(0); }*!*/
+/*!*}*!*/
+
+/*!*@keyframes reveal-soft {*!*/
+/*!*    from { opacity: 0; transform: translateY(12px); }*!*/
+/*!*    to   { opacity: 1; transform: translateY(0); }*!*/
+/*!*}*!*/
+
+/*!*@keyframes bracket-glow {*!*/
+/*!*    0%, 100% { opacity: 0.55; }*!*/
+/*!*    50%      { opacity: 1; }*!*/
+/*!*}*!*/
+
+/*!*!* soft ring that radiates from the status icon *!*!*/
+/*!*@keyframes status-ring {*!*/
+/*!*    0%   { box-shadow: 0 0 0 0 var(--status-border); }*!*/
+/*!*    100% { box-shadow: 0 0 0 14px transparent; }*!*/
+/*!*}*!*/
+
+/*!*.receipt {*!*/
+/*!*    animation: reveal-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;*!*/
+/*!*}*!*/
+
+/*!*.receipt::before,*!*/
+/*!*.receipt::after {*!*/
+/*!*    animation: bracket-glow 3.2s ease-in-out infinite;*!*/
+/*!*}*!*/
+
+/*!*.receipt > * {*!*/
+/*!*    animation: reveal-soft 0.55s ease both;*!*/
+/*!*}*!*/
+
+/*!*.receipt > *:nth-child(1)  { animation-delay: 0.20s; }*!*/
+/*!*.receipt > *:nth-child(2)  { animation-delay: 0.26s; }*!*/
+/*!*.receipt > *:nth-child(3)  { animation-delay: 0.32s; }*!*/
+/*!*.receipt > *:nth-child(4)  { animation-delay: 0.38s; }*!*/
+/*!*.receipt > *:nth-child(5)  { animation-delay: 0.44s; }*!*/
+/*!*.receipt > *:nth-child(6)  { animation-delay: 0.50s; }*!*/
+/*!*.receipt > *:nth-child(7)  { animation-delay: 0.56s; }*!*/
+/*!*.receipt > *:nth-child(8)  { animation-delay: 0.62s; }*!*/
+/*!*.receipt > *:nth-child(n+9) { animation-delay: 0.68s; }*!*/
+
+/*!*.status-icon {*!*/
+/*!*    animation: status-ring 2.2s ease-out infinite;*!*/
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   PRINT / PDF*!*/
+/*!*===================================================== *!*!*/
+
+/*!*@media print {*!*/
+
+/*!*    @page {*!*/
+/*!*        size: A4;*!*/
+/*!*        margin: 10mm;*!*/
+/*!*        margin-top: 20mm;*!*/
+/*!*    }*!*/
+
+/*!*    html,*!*/
+/*!*    body {*!*/
+/*!*        width: 210mm;*!*/
+
+/*!*        min-height: 297mm;*!*/
+
+/*!*        background: white;*!*/
+
+/*!*        margin: 0;*!*/
+/*!*        padding: 0;*!*/
+/*!*    }*!*/
+
+/*!*    !* no page backdrop on paper *!*!*/
+/*!*    body::before,*!*/
+/*!*    body::after {*!*/
+/*!*        display: none;*!*/
+/*!*    }*!*/
+
+/*!*    !* no animation on paper *!*!*/
+/*!*    *,*!*/
+/*!*    *::before,*!*/
+/*!*    *::after {*!*/
+/*!*        animation: none !important;*!*/
+/*!*        transition: none !important;*!*/
+/*!*    }*!*/
+
+/*!*    !**!*/
+/*!*      Every receipt starts on a new PDF page.*!*/
+/*!*    *!*!*/
+
+/*!*    .receipt {*!*/
+
+/*!*        width: 190mm;*!*/
+
+/*!*        max-width: 190mm;*!*/
+
+/*!*        min-height: 277mm;*!*/
+
+/*!*        margin: 0;*!*/
+
+/*!*        padding: 10mm;*!*/
+
+/*!*        box-shadow: none;*!*/
+
+/*!*        break-before: page;*!*/
+
+/*!*        page-break-before: always;*!*/
+
+/*!*        break-inside: avoid;*!*/
+
+/*!*        page-break-inside: avoid;*!*/
+
+/*!*        !**!*/
+/*!*          Keep the dark theme and status colours in the PDF.*!*/
+/*!*        *!*!*/
+
+/*!*        -webkit-print-color-adjust: exact;*!*/
+/*!*        print-color-adjust: exact;*!*/
+/*!*    }*!*/
+
+/*!*    .receipt *,*!*/
+/*!*    .receipt::before,*!*/
+/*!*    .receipt::after {*!*/
+/*!*        -webkit-print-color-adjust: exact;*!*/
+/*!*        print-color-adjust: exact;*!*/
+/*!*    }*!*/
+
+/*!*    !**!*/
+/*!*      First receipt does not create a blank page.*!*/
+/*!*    *!*!*/
+
+/*!*    .receipt:first-child {*!*/
+
+/*!*        break-before: auto;*!*/
+
+/*!*        page-break-before: auto;*!*/
+/*!*    }*!*/
+
+/*!*    !**!*/
+/*!*      Hide print button.*!*/
+/*!*    *!*!*/
+
+/*!*    .print-btn {*!*/
+
+/*!*        display: none !important;*!*/
+/*!*    }*!*/
+
+/*!*    !**!*/
+/*!*      Avoid breaking in pdf*!*/
+/*!*    *!*!*/
+/*!*    .provisional-notice {*!*/
+/*!*        break-inside: avoid;*!*/
+/*!*    }*!*/
+
+/*!*    !**!*/
+/*!*      Prevent sections from splitting.*!*/
+/*!*    *!*!*/
+
+/*!*    .header,*!*/
+/*!*    .customer-details,*!*/
+/*!*    .ticket-details,*!*/
+/*!*    .total,*!*/
+/*!*    .payment-details,*!*/
+/*!*    .payment-confirmation,*!*/
+/*!*    .qr-section,*!*/
+/*!*    .about-receipt,*!*/
+/*!*    .footer-note {*!*/
+
+/*!*        break-inside: avoid;*!*/
+
+/*!*        page-break-inside: avoid;*!*/
+/*!*    }*!*/
+
+/*!*    !**!*/
+/*!*      Preserve colors.*!*/
+/*!*    *!*!*/
+
+/*!*    .status-badge,*!*/
+/*!*    .payment-confirmation,*!*/
+/*!*    .status-icon,*!*/
+/*!*    .ticket-details h3 {*!*/
+
+/*!*        -webkit-print-color-adjust: exact;*!*/
+
+/*!*        print-color-adjust: exact;*!*/
+/*!*    }*!*/
+
+/*!*}*!*/
+
+
+/*!*!* =====================================================*!*/
+/*!*   MOBILE*!*/
+/*!*===================================================== *!*!*/
+
+/*!*@media (max-width: 600px) {*!*/
+
+/*!*    body {*!*/
+/*!*        padding: 10px;*!*/
+/*!*    }*!*/
+
+/*!*    .receipt {*!*/
+/*!*        padding: 22px;*!*/
+/*!*    }*!*/
+
+/*!*    .header {*!*/
+/*!*        flex-direction: column;*!*/
+/*!*        gap: 20px;*!*/
+/*!*    }*!*/
+
+/*!*    .header-right {*!*/
+/*!*        text-align: left;*!*/
+/*!*    }*!*/
+
+/*!*    .header h1 {*!*/
+/*!*        font-size: 21px;*!*/
+/*!*    }*!*/
+
+/*!*    .ticket-row {*!*/
+/*!*        padding: 13px 14px;*!*/
+
+/*!*        font-size: 14px;*!*/
+/*!*    }*!*/
+
+/*!*    .total h2 {*!*/
+/*!*        font-size: 19px;*!*/
+/*!*    }*!*/
+
+/*!*    #qrCode {*!*/
+/*!*        width: 190px;*!*/
+/*!*        height: 190px;*!*/
+/*!*    }*!*/
+
+/*!*}*!*/
+
+/*!*@media (prefers-reduced-motion: reduce) {*!*/
+/*!*    *, *::before, *::after {*!*/
+/*!*        animation: none !important;*!*/
+/*!*        transition: none !important;*!*/
+/*!*    }*!*/
+/*!*}*!*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*!* =====================================================*/
+/*   PROVISIONAL RECEIPT  -  DOT DevOps Team theme*/
+
+/*   Dark Hack.MCE look: wine-black page, dot grid, crimson*/
+/*   glow, and the receipt itself as a dark glass card with*/
+/*   crimson corner brackets.*/
+
+/*   STATUS COLOURS*/
+/*   Provisional_receipt.js sets, per payment status:*/
+/*     --status-color   dark, saturated  (e.g. #1e40af)*/
+/*     --status-light   pale tint        (e.g. #dbeafe)*/
+/*     --status-border  soft pastel      (e.g. #93c5fd)*/
+/*   On a dark card the pale / pastel values are used for text*/
+/*   and borders, and the saturated one for fills.*/
+
+/*   FONTS: set --font-head to the font used on the site.*/
+/*===================================================== *!*/
+
+/*:root {*/
+/*    --bg-0: #100a0e;*/
+
+/*    --red: #aa1210;*/
+/*    --red-hot: #c41c1a;*/
+/*    --red-bright: #ff4a3d;*/
+/*    --burgundy: #6c1b1c;*/
+/*    --rose: #a77a83;*/
+/*    --lav: #e1d6e9;*/
+
+/*    --glow: rgba(196, 28, 26, 0.45);*/
+
+/*    --card-top: #2b2026;*/
+/*    --card-bottom: #211920;*/
+/*    --text: #f3ecf2;*/
+/*    --text-dim: rgba(225, 218, 240, 0.68);*/
+/*    --line: rgba(225, 214, 233, 0.14);*/
+/*    --line-red: rgba(170, 18, 16, 0.45);*/
+
+/*    --font-head: "Orbitron", "Rajdhani", "Segoe UI", Arial, sans-serif;*/
+/*    --font-body: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;*/
+/*}*/
+
+/*!* =====================================================*/
+/*   GLOBAL*/
+/*===================================================== *!*/
+
+/** {*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*html {*/
+/*    background: var(--bg-0);*/
+/*}*/
+
+/*body {*/
+/*    margin: 0;*/
+/*    padding: 30px;*/
+
+/*    font-family: var(--font-body);*/
+/*    color: var(--text);*/
+
+/*    background: transparent;*/
+/*    -webkit-font-smoothing: antialiased;*/
+/*}*/
+
+/*!* ---- backdrop: wine-black base + crimson bloom ---- *!*/
+/*body::before {*/
+/*    content: "";*/
+/*    position: fixed;*/
+/*    inset: 0;*/
+/*    z-index: -2;*/
+/*    pointer-events: none;*/
+/*    background:*/
+/*        radial-gradient(120% 100% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(8, 4, 6, 0.65) 100%),*/
+/*        radial-gradient(55% 70% at 77% 40%, rgba(170, 18, 16, 0.30) 0%, rgba(108, 27, 28, 0.12) 42%, rgba(108, 27, 28, 0) 72%),*/
+/*        radial-gradient(50% 55% at 6% 0%, rgba(108, 27, 28, 0.30) 0%, rgba(108, 27, 28, 0) 70%),*/
+/*        linear-gradient(180deg, #1d1419 0%, #150e12 55%, #100a0e 100%);*/
+/*}*/
+
+/*!* ---- blueprint dot grid ---- *!*/
+/*body::after {*/
+/*    content: "";*/
+/*    position: fixed;*/
+/*    inset: 0;*/
+/*    z-index: -1;*/
+/*    pointer-events: none;*/
+/*    background-image: radial-gradient(circle, rgba(225, 214, 233, 0.16) 1px, rgba(225, 214, 233, 0) 1.5px);*/
+/*    background-size: 32px 32px;*/
+/*    background-position: -16px -16px;*/
+/*    -webkit-mask-image: linear-gradient(to right, transparent 12%, #000 72%);*/
+/*    mask-image: linear-gradient(to right, transparent 12%, #000 72%);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   RECEIPT (dark card)*/
+/*===================================================== *!*/
+
+/*.receipt {*/
+/*    !* fallbacks - Provisional_receipt.js overrides these inline *!*/
+/*    --status-color: #1e40af;*/
+/*    --status-light: #dbeafe;*/
+/*    --status-border: #93c5fd;*/
+
+/*    position: relative;*/
+
+/*    width: 100%;*/
+/*    max-width: 800px;*/
+/*    margin: 0 auto 30px;*/
+/*    padding: 40px;*/
+
+/*    background: linear-gradient(180deg, var(--card-top), var(--card-bottom));*/
+/*    color: var(--text);*/
+
+/*    border: 1px solid var(--line);*/
+/*    border-top: 6px solid var(--status-border);*/
+/*    border-radius: 16px;*/
+
+/*    box-shadow:*/
+/*        0 28px 70px rgba(0, 0, 0, 0.55),*/
+/*        0 0 60px -20px var(--glow);*/
+/*}*/
+
+/*!* crimson corner brackets, like the site panels *!*/
+/*.receipt::before,*/
+/*.receipt::after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    width: 20px;*/
+/*    height: 20px;*/
+/*    pointer-events: none;*/
+/*}*/
+
+/*.receipt::before {*/
+/*    top: 16px;*/
+/*    left: 16px;*/
+/*    border-top: 2px solid var(--red-bright);*/
+/*    border-left: 2px solid var(--red-bright);*/
+/*    border-top-left-radius: 6px;*/
+/*}*/
+
+/*.receipt::after {*/
+/*    right: 16px;*/
+/*    bottom: 16px;*/
+/*    border-right: 2px solid var(--red-bright);*/
+/*    border-bottom: 2px solid var(--red-bright);*/
+/*    border-bottom-right-radius: 6px;*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   HEADER*/
+/*===================================================== *!*/
+
+/*.header {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: flex-start;*/
+/*    gap: 30px;*/
+/*    margin-bottom: 30px;*/
+/*}*/
+
+/*.header-left {*/
+/*    flex: 1;*/
+/*}*/
+
+/*!* =====================================================*/
+/*   COMPANY LOGO*/
+/*===================================================== *!*/
+
+/*.company-logo {*/
+/*    display: block;*/
+
+/*    width: 120px;*/
+/*    max-width: 100%;*/
+/*    height: auto;*/
+/*    max-height: 70px;*/
+
+/*    object-fit: contain;*/
+
+/*    margin: 0 0 12px auto;*/
+/*}*/
+
+/*.header-right {*/
+/*    text-align: right;*/
+/*}*/
+
+/*.header h1 {*/
+/*    margin: 0 0 12px;*/
+
+/*    color: var(--status-border);*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 26px;*/
+/*    font-weight: 800;*/
+/*    letter-spacing: 0.06em;*/
+/*    text-transform: uppercase;*/
+/*}*/
+
+/*.header h3 {*/
+/*    margin: 0 0 10px;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 16px;*/
+/*    font-weight: 700;*/
+/*    letter-spacing: 0.1em;*/
+/*    text-transform: uppercase;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.header p {*/
+/*    margin: 6px 0;*/
+
+/*    font-size: 14px;*/
+/*    color: var(--text-dim);*/
+/*}*/
+
+/*.header p strong {*/
+/*    color: var(--lav);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   STATUS ICON*/
+/*===================================================== *!*/
+
+/*.status-icon {*/
+/*    display: inline-flex;*/
+
+/*    width: 40px;*/
+/*    height: 40px;*/
+
+/*    margin-right: 10px;*/
+
+/*    align-items: center;*/
+/*    justify-content: center;*/
+
+/*    border-radius: 50%;*/
+
+/*    background: var(--status-color);*/
+/*    border: 2px solid var(--status-border);*/
+/*    color: var(--status-light);*/
+
+/*    font-family: var(--font-body);*/
+/*    font-size: 20px;*/
+/*    font-weight: bold;*/
+
+/*    vertical-align: middle;*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   DIVIDER*/
+/*===================================================== *!*/
+
+/*hr {*/
+/*    border: none;*/
+/*    border-top: 1px dashed var(--line);*/
+/*    margin: 25px 0;*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   CUSTOMER*/
+/*===================================================== *!*/
+
+/*.customer-details {*/
+/*    margin-bottom: 25px;*/
+/*}*/
+
+/*.customer-details h3 {*/
+/*    margin: 0 0 10px;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 15px;*/
+/*    font-weight: 700;*/
+/*    letter-spacing: 0.1em;*/
+/*    text-transform: uppercase;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.customer-details p {*/
+/*    line-height: 1.7;*/
+/*    margin: 0;*/
+
+/*    font-size: 14px;*/
+/*    color: var(--text-dim);*/
+/*}*/
+
+/*.customer-details p strong {*/
+/*    color: var(--lav);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   TICKET*/
+/*===================================================== *!*/
+
+/*.ticket-details {*/
+/*    margin-top: 30px;*/
+
+/*    background: rgba(16, 10, 14, 0.35);*/
+/*    border: 1px solid var(--line);*/
+/*    border-radius: 12px;*/
+
+/*    overflow: hidden;*/
+/*}*/
+
+/*!* wine ticket header *!*/
+/*.ticket-details h3 {*/
+/*    margin: 0;*/
+
+/*    padding: 15px 18px;*/
+
+/*    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 12.5px;*/
+/*    font-weight: 700;*/
+/*    letter-spacing: 0.16em;*/
+/*    text-transform: uppercase;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.ticket-row {*/
+/*    display: flex;*/
+
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+
+/*    gap: 20px;*/
+
+/*    padding: 15px 18px;*/
+
+/*    border-top: 1px dotted var(--line);*/
+/*}*/
+
+/*.ticket-details h3 + .ticket-row {*/
+/*    border-top: none;*/
+/*}*/
+
+/*.ticket-row span {*/
+/*    font-size: 14px;*/
+/*    color: var(--text-dim);*/
+/*}*/
+
+/*.ticket-row strong {*/
+/*    font-size: 14.5px;*/
+/*    color: #fff;*/
+/*    text-align: right;*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   TOTAL*/
+/*===================================================== *!*/
+
+/*.total {*/
+/*    margin-top: 25px;*/
+/*    text-align: right;*/
+/*}*/
+
+/*.total p {*/
+/*    margin: 8px 0;*/
+
+/*    font-size: 14px;*/
+/*    color: var(--text-dim);*/
+/*}*/
+
+/*.total p strong {*/
+/*    color: var(--lav);*/
+/*}*/
+
+/*.total h2 {*/
+/*    margin: 15px 0 0;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 22px;*/
+/*    font-weight: 800;*/
+/*    letter-spacing: 0.04em;*/
+
+/*    color: var(--status-border);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   PROVISIONAL NOTICE*/
+/*===================================================== *!*/
+
+/*.provisional-notice {*/
+/*    margin-top: 25px;*/
+/*    padding: 15px;*/
+
+/*    border: 1px solid rgba(240, 173, 78, 0.5);*/
+/*    background: rgba(240, 173, 78, 0.10);*/
+/*    color: #f6c87a;*/
+
+/*    border-radius: 10px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.provisional-notice strong {*/
+/*    display: block;*/
+
+/*    margin-bottom: 7px;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 14px;*/
+/*    letter-spacing: 0.1em;*/
+/*    text-transform: uppercase;*/
+/*}*/
+
+/*.provisional-notice p {*/
+/*    margin: 0;*/
+
+/*    font-size: 13px;*/
+/*    line-height: 1.6;*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   PAYMENT DETAILS*/
+/*===================================================== *!*/
+
+/*.payment-details {*/
+/*    margin-top: 20px;*/
+/*}*/
+
+/*.payment-details p {*/
+/*    margin: 12px 0;*/
+
+/*    font-size: 14px;*/
+/*    color: var(--text-dim);*/
+/*}*/
+
+/*.payment-details p strong {*/
+/*    color: var(--lav);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   STATUS BADGE*/
+/*===================================================== *!*/
+
+/*.status-badge {*/
+/*    display: inline-flex;*/
+
+/*    align-items: center;*/
+
+/*    padding: 7px 13px;*/
+
+/*    border-radius: 20px;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 11px;*/
+/*    font-weight: 700;*/
+/*    letter-spacing: 0.08em;*/
+
+/*    color: var(--status-light);*/
+/*    background: var(--status-color);*/
+/*    border: 1px solid var(--status-border);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   CONFIRMATION BOX*/
+/*===================================================== *!*/
+
+/*.payment-confirmation {*/
+/*    margin-top: 25px;*/
+
+/*    padding: 20px;*/
+
+/*    border-radius: 12px;*/
+
+/*    text-align: center;*/
+
+/*    color: var(--status-light);*/
+
+/*    background: linear-gradient(150deg, var(--status-color), #211920);*/
+
+/*    border: 1px solid var(--status-border);*/
+/*}*/
+
+/*.payment-confirmation strong {*/
+/*    display: block;*/
+
+/*    margin-bottom: 8px;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 15px;*/
+/*    letter-spacing: 0.08em;*/
+/*    text-transform: uppercase;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.payment-confirmation p {*/
+/*    margin: 0;*/
+
+/*    font-size: 13px;*/
+
+/*    line-height: 1.6;*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   QR CODE*/
+/*===================================================== *!*/
+
+/*.qr-section {*/
+/*    margin-top: 30px;*/
+
+/*    padding: 25px 20px;*/
+
+/*    border: 1px dashed var(--line-red);*/
+
+/*    background: rgba(16, 10, 14, 0.40);*/
+
+/*    border-radius: 12px;*/
+
+/*    text-align: center;*/
+/*}*/
+
+/*.qr-section h3 {*/
+/*    margin: 0 0 8px;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 14px;*/
+/*    letter-spacing: 0.1em;*/
+/*    text-transform: uppercase;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.qr-section p {*/
+/*    font-size: 13px;*/
+
+/*    color: var(--text-dim);*/
+
+/*    margin: 0 0 18px;*/
+/*}*/
+
+/*!* stays white: a QR code needs a light background to be scannable *!*/
+/*#qrCode {*/
+/*    width: 210px;*/
+/*    height: 210px;*/
+
+/*    margin: auto;*/
+/*    padding: 10px;*/
+
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+
+/*    background: #ffffff;*/
+/*    border: 3px solid var(--red-bright);*/
+/*    border-radius: 14px;*/
+
+/*    box-shadow: 0 0 30px -6px var(--glow);*/
+/*}*/
+
+/*#qrCode canvas,*/
+/*#qrCode img {*/
+/*    max-width: 100%;*/
+/*    max-height: 100%;*/
+/*}*/
+
+/*.qr-reference {*/
+/*    margin-top: 14px;*/
+
+/*    font-size: 12px;*/
+/*    letter-spacing: 0.04em;*/
+
+/*    color: var(--text-dim);*/
+/*}*/
+
+/*.qr-reference strong {*/
+/*    color: var(--lav);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   ABOUT RECEIPT*/
+/*===================================================== *!*/
+
+/*.about-receipt {*/
+/*    margin-top: 25px;*/
+
+/*    padding: 18px;*/
+
+/*    border: 1px solid var(--line);*/
+
+/*    background: rgba(225, 214, 233, 0.04);*/
+
+/*    border-radius: 12px;*/
+/*}*/
+
+/*.about-receipt h3 {*/
+/*    margin: 0 0 12px;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 13px;*/
+/*    letter-spacing: 0.12em;*/
+/*    text-transform: uppercase;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.about-receipt p {*/
+/*    margin: 8px 0;*/
+
+/*    font-size: 13px;*/
+
+/*    line-height: 1.6;*/
+
+/*    color: var(--text-dim);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   FOOTER*/
+/*===================================================== *!*/
+
+/*.footer-note {*/
+/*    margin-top: 30px;*/
+
+/*    padding-top: 15px;*/
+
+/*    border-top: 1px solid var(--line);*/
+
+/*    text-align: center;*/
+
+/*    font-size: 12px;*/
+
+/*    color: var(--text-dim);*/
+/*}*/
+
+/*!* brand line under the footer message *!*/
+/*.footer-note::after {*/
+/*    content: "DOT DevOps Team  \00B7  Build \2022  Learn \2022  Connect \2022  Create";*/
+
+/*    display: block;*/
+/*    margin-top: 8px;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 9.5px;*/
+/*    letter-spacing: 0.16em;*/
+/*    text-transform: uppercase;*/
+/*    color: var(--red-bright);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   PRINT BUTTON*/
+/*===================================================== *!*/
+
+/*.print-btn {*/
+/*    display: block;*/
+
+/*    margin: 28px auto 0;*/
+
+/*    padding: 13px 26px;*/
+
+/*    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));*/
+
+/*    color: white;*/
+
+/*    border: none;*/
+
+/*    border-radius: 10px;*/
+
+/*    box-shadow: 0 12px 28px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);*/
+
+/*    cursor: pointer;*/
+
+/*    font-family: var(--font-head);*/
+/*    font-size: 12px;*/
+/*    font-weight: 700;*/
+/*    letter-spacing: 0.14em;*/
+/*    text-transform: uppercase;*/
+
+/*    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);*/
+/*}*/
+
+/*.print-btn:hover {*/
+/*    transform: translateY(-2px);*/
+/*    box-shadow: 0 16px 34px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   ANIMATIONS  (same feel as the Hack.MCE site)*/
+/*   NOTE: Generate_pdf.js freezes these before it captures*/
+/*   the PDF, so the download is never caught mid-animation.*/
+/*===================================================== *!*/
+
+/*@keyframes reveal-up {*/
+/*    from { opacity: 0; transform: translateY(24px); }*/
+/*    to   { opacity: 1; transform: translateY(0); }*/
+/*}*/
+
+/*@keyframes reveal-soft {*/
+/*    from { opacity: 0; transform: translateY(12px); }*/
+/*    to   { opacity: 1; transform: translateY(0); }*/
+/*}*/
+
+/*@keyframes bracket-glow {*/
+/*    0%, 100% { opacity: 0.55; }*/
+/*    50%      { opacity: 1; }*/
+/*}*/
+
+/*!* soft ring that radiates from the status icon *!*/
+/*@keyframes status-ring {*/
+/*    0%   { box-shadow: 0 0 0 0 var(--status-border); }*/
+/*    100% { box-shadow: 0 0 0 14px transparent; }*/
+/*}*/
+
+/*.receipt {*/
+/*    animation: reveal-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;*/
+/*}*/
+
+/*.receipt::before,*/
+/*.receipt::after {*/
+/*    animation: bracket-glow 3.2s ease-in-out infinite;*/
+/*}*/
+
+/*.receipt > * {*/
+/*    animation: reveal-soft 0.55s ease both;*/
+/*}*/
+
+/*.receipt > *:nth-child(1)  { animation-delay: 0.20s; }*/
+/*.receipt > *:nth-child(2)  { animation-delay: 0.26s; }*/
+/*.receipt > *:nth-child(3)  { animation-delay: 0.32s; }*/
+/*.receipt > *:nth-child(4)  { animation-delay: 0.38s; }*/
+/*.receipt > *:nth-child(5)  { animation-delay: 0.44s; }*/
+/*.receipt > *:nth-child(6)  { animation-delay: 0.50s; }*/
+/*.receipt > *:nth-child(7)  { animation-delay: 0.56s; }*/
+/*.receipt > *:nth-child(8)  { animation-delay: 0.62s; }*/
+/*.receipt > *:nth-child(n+9) { animation-delay: 0.68s; }*/
+
+/*.status-icon {*/
+/*    animation: status-ring 2.2s ease-out infinite;*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   PDF CAPTURE MODE*/
+/*   Generate_pdf.js loads this page in a hidden iframe. The tiny*/
+/*   script in <head> adds .pdf-mode there, so NOTHING animates and*/
+/*   the page is captured in its final, fully visible state.*/
+/*===================================================== *!*/
+
+/*html.pdf-mode *,*/
+/*html.pdf-mode *::before,*/
+/*html.pdf-mode *::after {*/
+/*    animation: none !important;*/
+/*    transition: none !important;*/
+/*}*/
+
+
+/*!* =====================================================*/
+/*   PRINT / PDF*/
+/*===================================================== *!*/
+
+/*@media print {*/
+
+/*    @page {*/
+/*        size: A4;*/
+/*        margin: 10mm;*/
+/*        margin-top: 20mm;*/
+/*    }*/
+
+/*    html,*/
+/*    body {*/
+/*        width: 210mm;*/
+
+/*        min-height: 297mm;*/
+
+/*        background: white;*/
+
+/*        margin: 0;*/
+/*        padding: 0;*/
+/*    }*/
+
+/*    !* no page backdrop on paper *!*/
+/*    body::before,*/
+/*    body::after {*/
+/*        display: none;*/
+/*    }*/
+
+/*    !* no animation on paper *!*/
+/*    *,*/
+/*    *::before,*/
+/*    *::after {*/
+/*        animation: none !important;*/
+/*        transition: none !important;*/
+/*    }*/
+
+/*    !**/
+/*      Every receipt starts on a new PDF page.*/
+/*    *!*/
+
+/*    .receipt {*/
+
+/*        width: 190mm;*/
+
+/*        max-width: 190mm;*/
+
+/*        min-height: 277mm;*/
+
+/*        margin: 0;*/
+
+/*        padding: 10mm;*/
+
+/*        box-shadow: none;*/
+
+/*        break-before: page;*/
+
+/*        page-break-before: always;*/
+
+/*        break-inside: avoid;*/
+
+/*        page-break-inside: avoid;*/
+
+/*        !**/
+/*          Keep the dark theme and status colours in the PDF.*/
+/*        *!*/
+
+/*        -webkit-print-color-adjust: exact;*/
+/*        print-color-adjust: exact;*/
+/*    }*/
+
+/*    .receipt *,*/
+/*    .receipt::before,*/
+/*    .receipt::after {*/
+/*        -webkit-print-color-adjust: exact;*/
+/*        print-color-adjust: exact;*/
+/*    }*/
+
+/*    !**/
+/*      First receipt does not create a blank page.*/
+/*    *!*/
+
+/*    .receipt:first-child {*/
+
+/*        break-before: auto;*/
+
+/*        page-break-before: auto;*/
+/*    }*/
+
+/*    !**/
+/*      Hide print button.*/
+/*    *!*/
+
+/*    .print-btn {*/
+
+/*        display: none !important;*/
+/*    }*/
+
+/*    !**/
+/*      Avoid breaking in pdf*/
+/*    *!*/
+/*    .provisional-notice {*/
+/*        break-inside: avoid;*/
+/*    }*/
+
+/*    !**/
+/*      Prevent sections from splitting.*/
+/*    *!*/
+
+/*    .header,*/
+/*    .customer-details,*/
+/*    .ticket-details,*/
+/*    .total,*/
+/*    .payment-details,*/
+/*    .payment-confirmation,*/
+/*    .qr-section,*/
+/*    .about-receipt,*/
+/*    .footer-note {*/
+
+/*        break-inside: avoid;*/
+
+/*        page-break-inside: avoid;*/
+/*    }*/
+
+/*    !**/
+/*      Preserve colors.*/
+/*    *!*/
+
+/*    .status-badge,*/
+/*    .payment-confirmation,*/
+/*    .status-icon,*/
+/*    .ticket-details h3 {*/
+
+/*        -webkit-print-color-adjust: exact;*/
+
+/*        print-color-adjust: exact;*/
+/*    }*/
+
+/*}*/
+
+
+/*!* =====================================================*/
+/*   MOBILE*/
+/*===================================================== *!*/
+
+/*@media (max-width: 600px) {*/
+
+/*    body {*/
+/*        padding: 10px;*/
+/*    }*/
+
+/*    .receipt {*/
+/*        padding: 22px;*/
+/*    }*/
+
+/*    .header {*/
+/*        flex-direction: column;*/
+/*        gap: 20px;*/
+/*    }*/
+
+/*    .header-right {*/
+/*        text-align: left;*/
+/*    }*/
+
+/*    .header h1 {*/
+/*        font-size: 21px;*/
+/*    }*/
+
+/*    .ticket-row {*/
+/*        padding: 13px 14px;*/
+
+/*        font-size: 14px;*/
+/*    }*/
+
+/*    .total h2 {*/
+/*        font-size: 19px;*/
+/*    }*/
+
+/*    #qrCode {*/
+/*        width: 190px;*/
+/*        height: 190px;*/
+/*    }*/
+
+/*}*/
+
+/*@media (prefers-reduced-motion: reduce) {*/
+/*    *, *::before, *::after {*/
+/*        animation: none !important;*/
+/*        transition: none !important;*/
+/*    }*/
+/*}*/
+
+
+
+/* =====================================================
+   PROVISIONAL RECEIPT  -  DOT DevOps Team theme
+
+   Dark Hack.MCE look: wine-black page, dot grid, crimson
+   glow, and the receipt itself as a dark glass card with
+   crimson corner brackets.
+
+   STATUS COLOURS
+   Provisional_receipt.js sets, per payment status:
+     --status-color   dark, saturated  (e.g. #1e40af)
+     --status-light   pale tint        (e.g. #dbeafe)
+     --status-border  soft pastel      (e.g. #93c5fd)
+   On a dark card the pale / pastel values are used for text
+   and borders, and the saturated one for fills.
+
+   FONTS: set --font-head to the font used on the site.
+===================================================== */
+
+:root {
+    --bg-0: #100a0e;
+
+    --red: #aa1210;
+    --red-hot: #c41c1a;
+    --red-bright: #ff4a3d;
+    --burgundy: #6c1b1c;
+    --rose: #a77a83;
+    --lav: #e1d6e9;
+
+    --glow: rgba(196, 28, 26, 0.45);
+
+    --card-top: #2b2026;
+    --card-bottom: #211920;
+    --text: #f3ecf2;
+    --text-dim: rgba(225, 218, 240, 0.68);
+    --line: rgba(225, 214, 233, 0.14);
+    --line-red: rgba(170, 18, 16, 0.45);
+
+    --font-head: "Orbitron", "Rajdhani", "Segoe UI", Arial, sans-serif;
+    --font-body: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--bg-0);
+}
+
+body {
+    margin: 0;
+    padding: 30px;
+
+    font-family: var(--font-body);
+    color: var(--text);
+
+    background: transparent;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---- backdrop: wine-black base + crimson bloom ---- */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(120% 100% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(8, 4, 6, 0.65) 100%),
+        radial-gradient(55% 70% at 77% 40%, rgba(170, 18, 16, 0.30) 0%, rgba(108, 27, 28, 0.12) 42%, rgba(108, 27, 28, 0) 72%),
+        radial-gradient(50% 55% at 6% 0%, rgba(108, 27, 28, 0.30) 0%, rgba(108, 27, 28, 0) 70%),
+        linear-gradient(180deg, #1d1419 0%, #150e12 55%, #100a0e 100%);
+}
+
+/* ---- blueprint dot grid ---- */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(225, 214, 233, 0.16) 1px, rgba(225, 214, 233, 0) 1.5px);
+    background-size: 32px 32px;
+    background-position: -16px -16px;
+    -webkit-mask-image: linear-gradient(to right, transparent 12%, #000 72%);
+    mask-image: linear-gradient(to right, transparent 12%, #000 72%);
+}
+
+
+/* =====================================================
+   RECEIPT (dark card)
+===================================================== */
+
+.receipt {
+    /* fallbacks - Provisional_receipt.js overrides these inline */
+    --status-color: #1e40af;
+    --status-light: #dbeafe;
+    --status-border: #93c5fd;
+
+    position: relative;
+
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    padding: 40px;
+
+    background: linear-gradient(180deg, var(--card-top), var(--card-bottom));
+    color: var(--text);
+
+    border: 1px solid var(--line);
+    border-top: 6px solid var(--status-border);
+    border-radius: 16px;
+
+    box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.55),
+        0 0 60px -20px var(--glow);
+}
+
+/* crimson corner brackets, like the site panels */
+.receipt::before,
+.receipt::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.receipt::before {
+    top: 16px;
+    left: 16px;
+    border-top: 2px solid var(--red-bright);
+    border-left: 2px solid var(--red-bright);
+    border-top-left-radius: 6px;
+}
+
+.receipt::after {
+    right: 16px;
+    bottom: 16px;
+    border-right: 2px solid var(--red-bright);
+    border-bottom: 2px solid var(--red-bright);
+    border-bottom-right-radius: 6px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.header-left {
+    flex: 1;
+}
+
+/* =====================================================
+   COMPANY LOGO
+===================================================== */
+
+.company-logo {
+    display: block;
+
+    width: 120px;
+    max-width: 100%;
+    height: auto;
+    max-height: 70px;
+
+    object-fit: contain;
+
+    margin: 0 0 12px auto;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.header h1 {
+    margin: 0 0 12px;
+
+    color: var(--status-border);
+
+    font-family: var(--font-head);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.header h3 {
+    margin: 0 0 10px;
+
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.header p {
+    margin: 6px 0;
+
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.header p strong {
+    color: var(--lav);
+}
+
+
+/* =====================================================
+   STATUS ICON
+===================================================== */
+
+.status-icon {
+    display: inline-flex;
+
+    width: 40px;
+    height: 40px;
+
+    margin-right: 10px;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--status-color);
+    border: 2px solid var(--status-border);
+    color: var(--status-light);
+
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: bold;
+
+    vertical-align: middle;
+}
+
+
+/* =====================================================
+   DIVIDER
+===================================================== */
+
+hr {
+    border: none;
+    border-top: 1px dashed var(--line);
+    margin: 25px 0;
+}
+
+
+/* =====================================================
+   CUSTOMER
+===================================================== */
+
+.customer-details {
+    margin-bottom: 25px;
+}
+
+.customer-details h3 {
+    margin: 0 0 10px;
+
+    font-family: var(--font-head);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.customer-details p {
+    line-height: 1.7;
+    margin: 0;
+
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.customer-details p strong {
+    color: var(--lav);
+}
+
+
+/* =====================================================
+   TICKET
+===================================================== */
+
+.ticket-details {
+    margin-top: 30px;
+
+    background: rgba(16, 10, 14, 0.35);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+/* wine ticket header */
+.ticket-details h3 {
+    margin: 0;
+
+    padding: 15px 18px;
+
+    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));
+
+    font-family: var(--font-head);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.ticket-row {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 15px 18px;
+
+    border-top: 1px dotted var(--line);
+}
+
+.ticket-details h3 + .ticket-row {
+    border-top: none;
+}
+
+.ticket-row span {
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.ticket-row strong {
+    font-size: 14.5px;
+    color: #fff;
+    text-align: right;
+}
+
+
+/* =====================================================
+   TOTAL
+===================================================== */
+
+.total {
+    margin-top: 25px;
+    text-align: right;
+}
+
+.total p {
+    margin: 8px 0;
+
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.total p strong {
+    color: var(--lav);
+}
+
+.total h2 {
+    margin: 15px 0 0;
+
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+
+    color: var(--status-border);
+}
+
+
+/* =====================================================
+   PROVISIONAL NOTICE
+===================================================== */
+
+.provisional-notice {
+    margin-top: 25px;
+    padding: 15px;
+
+    border: 1px solid rgba(240, 173, 78, 0.5);
+    background: rgba(240, 173, 78, 0.10);
+    color: #f6c87a;
+
+    border-radius: 10px;
+    text-align: center;
+}
+
+.provisional-notice strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-family: var(--font-head);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.provisional-notice p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   PAYMENT DETAILS
+===================================================== */
+
+.payment-details {
+    margin-top: 20px;
+}
+
+.payment-details p {
+    margin: 12px 0;
+
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.payment-details p strong {
+    color: var(--lav);
+}
+
+
+/* =====================================================
+   STATUS BADGE
+===================================================== */
+
+.status-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+
+    color: var(--status-light);
+    background: var(--status-color);
+    border: 1px solid var(--status-border);
+}
+
+
+/* =====================================================
+   CONFIRMATION BOX
+===================================================== */
+
+.payment-confirmation {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    color: var(--status-light);
+
+    background: linear-gradient(150deg, var(--status-color), #211920);
+
+    border: 1px solid var(--status-border);
+}
+
+.payment-confirmation strong {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-family: var(--font-head);
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.payment-confirmation p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   QR CODE
+===================================================== */
+
+.qr-section {
+    margin-top: 30px;
+
+    padding: 25px 20px;
+
+    border: 1px dashed var(--line-red);
+
+    background: rgba(16, 10, 14, 0.40);
+
+    border-radius: 12px;
+
+    text-align: center;
+}
+
+.qr-section h3 {
+    margin: 0 0 8px;
+
+    font-family: var(--font-head);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.qr-section p {
+    font-size: 13px;
+
+    color: var(--text-dim);
+
+    margin: 0 0 18px;
+}
+
+/* stays white: a QR code needs a light background to be scannable */
+#qrCode {
+    width: 210px;
+    height: 210px;
+
+    margin: auto;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+    border: 3px solid var(--red-bright);
+    border-radius: 14px;
+
+    box-shadow: 0 0 30px -6px var(--glow);
+}
+
+#qrCode canvas,
+#qrCode img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.qr-reference {
+    margin-top: 14px;
+
+    font-size: 12px;
+    letter-spacing: 0.04em;
+
+    color: var(--text-dim);
+}
+
+.qr-reference strong {
+    color: var(--lav);
+}
+
+
+/* =====================================================
+   ABOUT RECEIPT
+===================================================== */
+
+.about-receipt {
+    margin-top: 25px;
+
+    padding: 18px;
+
+    border: 1px solid var(--line);
+
+    background: rgba(225, 214, 233, 0.04);
+
+    border-radius: 12px;
+}
+
+.about-receipt h3 {
+    margin: 0 0 12px;
+
+    font-family: var(--font-head);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.about-receipt p {
+    margin: 8px 0;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    color: var(--text-dim);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer-note {
+    margin-top: 30px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid var(--line);
+
+    text-align: center;
+
+    font-size: 12px;
+
+    color: var(--text-dim);
+}
+
+/* brand line under the footer message */
+.footer-note::after {
+    content: "DOT DevOps Team  \00B7  Build \2022  Learn \2022  Connect \2022  Create";
+
+    display: block;
+    margin-top: 8px;
+
+    font-family: var(--font-head);
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+}
+
+
+/* =====================================================
+   PRINT BUTTON
+===================================================== */
+
+.print-btn {
+    display: block;
+
+    margin: 28px auto 0;
+
+    padding: 13px 26px;
+
+    background: linear-gradient(150deg, var(--red-hot), var(--burgundy));
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    box-shadow: 0 12px 28px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    cursor: pointer;
+
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px -10px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+
+/* =====================================================
+   ANIMATIONS  (same feel as the Hack.MCE site)
+   NOTE: Generate_pdf.js freezes these before it captures
+   the PDF, so the download is never caught mid-animation.
+===================================================== */
+
+@keyframes reveal-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal-soft {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bracket-glow {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+}
+
+/* soft ring that radiates from the status icon */
+@keyframes status-ring {
+    0%   { box-shadow: 0 0 0 0 var(--status-border); }
+    100% { box-shadow: 0 0 0 14px transparent; }
+}
+
+.receipt::before,
+.receipt::after {
+    animation: bracket-glow 3.2s ease-in-out infinite;
+}
+
+.status-icon {
+    animation: status-ring 2.2s ease-out infinite;
+}
+
+
+/* =====================================================
+   PDF CAPTURE MODE
+   Generate_pdf.js loads this page in a hidden iframe. The tiny
+   script in <head> adds .pdf-mode there, so NOTHING animates and
+   the page is captured in its final, fully visible state.
+===================================================== */
+
+html.pdf-mode *,
+html.pdf-mode *::before,
+html.pdf-mode *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+
+/* =====================================================
+   PRINT / PDF
+===================================================== */
+
+@media print {
+
+    @page {
+        size: A4;
+        margin: 10mm;
+        margin-top: 20mm;
+    }
+
+    html,
+    body {
+        width: 210mm;
+
+        min-height: 297mm;
+
+        background: white;
+
+        margin: 0;
+        padding: 0;
+    }
+
+    /* no page backdrop on paper */
+    body::before,
+    body::after {
+        display: none;
+    }
+
+    /* no animation on paper */
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    /*
+      Every receipt starts on a new PDF page.
+    */
+
+    .receipt {
+
+        width: 190mm;
+
+        max-width: 190mm;
+
+        min-height: 277mm;
+
+        margin: 0;
+
+        padding: 10mm;
+
+        box-shadow: none;
+
+        break-before: page;
+
+        page-break-before: always;
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+
+        /*
+          Keep the dark theme and status colours in the PDF.
+        */
+
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .receipt *,
+    .receipt::before,
+    .receipt::after {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /*
+      First receipt does not create a blank page.
+    */
+
+    .receipt:first-child {
+
+        break-before: auto;
+
+        page-break-before: auto;
+    }
+
+    /*
+      Hide print button.
+    */
+
+    .print-btn {
+
+        display: none !important;
+    }
+
+    /*
+      Avoid breaking in pdf
+    */
+    .provisional-notice {
+        break-inside: avoid;
+    }
+
+    /*
+      Prevent sections from splitting.
+    */
+
+    .header,
+    .customer-details,
+    .ticket-details,
+    .total,
+    .payment-details,
+    .payment-confirmation,
+    .qr-section,
+    .about-receipt,
+    .footer-note {
+
+        break-inside: avoid;
+
+        page-break-inside: avoid;
+    }
+
+    /*
+      Preserve colors.
+    */
+
+    .status-badge,
+    .payment-confirmation,
+    .status-icon,
+    .ticket-details h3 {
+
+        -webkit-print-color-adjust: exact;
+
+        print-color-adjust: exact;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .receipt {
+        padding: 22px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .header-right {
+        text-align: left;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .ticket-row {
+        padding: 13px 14px;
+
+        font-size: 14px;
+    }
+
+    .total h2 {
+        font-size: 19px;
+    }
+
+    #qrCode {
+        width: 190px;
+        height: 190px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

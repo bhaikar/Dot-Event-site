@@ -1,6 +1,9 @@
-import {generateQR} from "./Generate_qr.js";
-import {updateTime} from "./Generate_dateTime.js"
-import {addTicket} from "./Firebase.js"
+import {generateQR} from "./utility/Generate_qr.js";
+import {updateTime} from "./utility/Generate_dateTime.js"
+import {addTicket} from "./utility/Firebase.js"
+import {downloadReceiptPdf} from "./utility/Generate_pdf.js"
+
+// inside your submit handler, after sessionStorage.setItem("teamData", ...)
 
 
 
@@ -103,11 +106,14 @@ form.addEventListener("submit", function (event) {
   downloadBtn.disabled = false;
   submitBtn.disabled = true;
   addTicket(utr);
+  downloadReceiptPdf();
+
 
 });
   // linking the receipt sheet
   downloadBtn.addEventListener("click", function () {
   window.location.href = "Provisional_receipt.html";
 });
+
 
 

@@ -22,8 +22,8 @@
    "ON_HOLD"
 
 ====================================================== */
-import {updateFullDate} from "./Generate_dateTime.js"
-import {generateQRImg} from "./Generate_qr.js";
+import {updateFullDate} from "./utility/Generate_dateTime.js"
+import {generateQRImg} from "./utility/Generate_qr.js";
 
 const paymentStatus = "UNDER_VERIFICATION";
 const teamData = JSON.parse(sessionStorage.getItem("teamData"));
@@ -630,6 +630,21 @@ document
   .getElementById("receiptDate")
   .textContent =
   receiptDate;
+
+
+/* =====================================================
+   THANK NOTE
+====================================================== */
+
+document
+  .getElementById("leaderName")
+  .textContent =
+  teamData.leaderName;
+
+document
+  .getElementById("eventName")
+  .textContent =
+  teamData.ticket;
 
 
 /* =====================================================

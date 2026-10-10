@@ -1,5 +1,5 @@
-import {generateTransactionId,generateTicketId} from "./Generate_uuid.js";
-import {updateDate , updateTime} from "./Generate_dateTime.js"
+import {generateTransactionId,generateTicketId} from "./utility/Generate_uuid.js";
+import {updateDate , updateTime} from "./utility/Generate_dateTime.js"
 
 setInterval(() => {updateDate() ; updateTime()},1000);
 
@@ -50,7 +50,8 @@ addMemberBtn.addEventListener("click", function () {
 
     updateButton();
 });
-
+// available in html
+window.removeMember = removeMember;
 
 // Remove member
 function removeMember(button) {
@@ -145,6 +146,7 @@ form.addEventListener("submit", function(event) {
         utr : "None",
         receiptID : "None",
         ticketPrice: ticketAmt(document.getElementById("ticket").value),
+        emailId : document.getElementById("email").value.trim().toLowerCase(),
         paymentStatus:"UNDER_VERIFICATION"
     };
 
@@ -173,4 +175,84 @@ form.addEventListener("submit", function(event) {
     // updateButton();
 
 });
+
+
+// drop down style change
+
+    const dropdown = document.getElementById("eventDropdown");
+    const selected = dropdown.querySelector(".dropdown-selected");
+    const options =dropdown.querySelectorAll(".dropdown-option");
+    const selectedTitle =document.getElementById("selectedTitle");
+    const selectedPrice =document.getElementById("selectedPrice");
+    const ticket =document.getElementById("ticket");
+
+
+    // Open / close dropdown
+
+    selected.addEventListener("click", function () {
+
+        dropdown.classList.toggle("active");
+
+    });
+
+
+    // Select an option
+
+    options.forEach(option => {
+
+        option.addEventListener("click", function () {
+
+            const value = this.dataset.value;
+
+            const price = this.dataset.price;
+
+
+            // Update selected display
+
+            selectedTitle.textContent = value;
+
+            selectedPrice.textContent =
+                `Ticket price: ${price}`;
+
+
+            // Update hidden select
+
+            ticket.value = value;
+
+
+            // Remove selected state
+
+            options.forEach(item => {
+
+                item.classList.remove("selected");
+
+            });
+
+
+            // Add selected state
+
+            this.classList.add("selected");
+
+
+            // Close dropdown
+
+            dropdown.classList.remove("active");
+
+        });
+
+    });
+
+
+    // Close dropdown when clicking outside
+
+    document.addEventListener("click", function (event) {
+
+        if (!dropdown.contains(event.target)) {
+
+            dropdown.classList.remove("active");
+
+        }
+
+    });
+
 
